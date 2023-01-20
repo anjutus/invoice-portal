@@ -1,8 +1,8 @@
 import './App.css';
 import NavigationBar from './Components/NavigationBar';
-import DashboardApp from './Components/DashboardApp';
+import DashboardApp from './Components/Dashboard/DashboardApp';
 import { BrowserRouter as Router, Routes,Route } from "react-router-dom";
-import ListInvoices from './Components/ListInvoices';
+import ListInvoices from './Components/ViewInvoices/ListInvoices';
 
 function App() {
   return (

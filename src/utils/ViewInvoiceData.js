@@ -22,5 +22,13 @@ export  const ViewInvoiceData = [
         dueDate: "03/20/2022",
         amount: "$2000",
         status: "Rejected"
+    },
+    {
+        invoiceId: 322454,
+        clientName: "Genesis Inc",
+        issueDate : "01/20/2022",
+        dueDate: "03/20/2022",
+        amount: "$2000",
+        status: "Rejected"
     }
   ]

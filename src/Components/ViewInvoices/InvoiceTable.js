@@ -1,3 +1,9 @@
+/*
+*Table component for displaying Invoice details
+**@author: Anju Tuscano
+
+*/
+
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -7,6 +13,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { ViewInvoiceData } from "../../utils/ViewInvoiceData";
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -28,17 +36,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(invoiceId, clientName, issueDate, dueDate, amount,status) {
-  return { invoiceId, clientName, issueDate, dueDate, amount ,status};
-}
-
-const data = [
-  createData(12233, "Genesis", "01/20/2022", "01/20/2022", "$2000","Approved"),
-  createData(23232, "Genesis","01/20/2022", "01/20/2022", "$2000","Approved"),
-  createData(42222, "Genesis", "01/20/2022", "01/20/2022","$2000","Rejected"),
-  createData(23233, "Genesis", "01/20/2022", "01/20/2022","$2000","Pending"),
-  createData(24444, "Genesis", "01/20/2022", "01/20/2022","$2000","Approved"),
-];
+//Add invoice data array in local variable
+const data=ViewInvoiceData;
 
 export default function InvoiceTable() {
   return (

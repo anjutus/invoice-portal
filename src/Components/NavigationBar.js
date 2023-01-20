@@ -1,3 +1,10 @@
+/*
+* Static Responsive Navigation Bar for Invoice portal app
+**@author: Anju Tuscano
+
+*/
+
+
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -11,21 +18,26 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import Link from '@mui/material/Link'
 import Logo from '../Media/InvoicePortalLogo.png'
 import { deepOrange } from '@mui/material/colors';
 import { Link as ReactLink } from "react-router-dom";
 
 const pages = [
-    {menuName:"View Invoices",
-      menuLinkName: "/viewInvoices"  },
-      {menuName:"Create Invoices",
-      menuLinkName: "/createInvoices"  },
-      {menuName:"Inquires",
-      menuLinkName: "/inquires"  }
+                {  
+                    menuName:"View Invoices",
+                    menuLinkName: "/viewInvoices"
+                },
+                {
+                    menuName:"Create Invoices",
+                    menuLinkName: "/createInvoices"
+                },
+                {   
+                    menuName:"Inquires",
+                    menuLinkName: "/inquires"
+                }
+            ];
 
-];
 const settings = ['Profile', 'Account', 'Logout'];
 
 function NavigationBar() {
@@ -51,28 +63,10 @@ function NavigationBar() {
         <AppBar position="static">
             <Container maxWidth="xl" sx={{ backgroundColor: "#3DA000" }}>
                 <Toolbar>
-                    {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-                    <Link
-                        href="#"
-                        underline="none"
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'none', md: 'flex' },
-                        }}
-                    >
-                        <img
-                            className="nav-logo"
-                            src={Logo}
-                            alt="Invoice Portal Logo"
-                            width="40"
-                            height="40"
-                        />
+                    <Link href="#" underline="none" sx={{ mr: 2, display: { xs: 'none', md: 'flex' },}}>
+                        <img className="nav-logo" src={Logo} alt="Invoice Portal Logo" width="40" height="40"/>
                     </Link>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="a"
-                        href="/"
+                    <Typography variant="h6" noWrap component="a" href="/"
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
@@ -80,11 +74,11 @@ function NavigationBar() {
                             fontWeight: 700,
                             color: 'inherit',
                             textDecoration: 'none',
-                        }}
-                    >
+                        }}>
                         Invoice Portal
                     </Typography>
 
+                    {/* For Small Screen Device */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"
