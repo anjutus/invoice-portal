@@ -3,16 +3,13 @@
 @author: 
 */
 
-import { Grid, Container, Typography } from '@mui/material';
+import { Grid, Container} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import PieChart from "./PieChart";
-
 import { InvoiceData } from "../utils/PieData";
 import { properties } from '../utils/properties.js';
-
-import { reusableFunctions } from '../utils/reusableFunctions.js';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
