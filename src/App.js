@@ -3,6 +3,7 @@ import NavigationBar from './Components/NavigationBar';
 import DashboardApp from './Components/Dashboard/DashboardApp';
 import { BrowserRouter as Router, Routes,Route } from "react-router-dom";
 import ListInvoices from './Components/ViewInvoices/ListInvoices';
+import CreateInvoice from './Components/CreateInvoice';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
             <Routes>
               <Route exact path="/" element={<DashboardApp />} />
               <Route path="viewInvoices" element={<ListInvoices />} />
+              <Route path="createInvoice" element={<CreateInvoice />} />
             </Routes>
         </Router>
     </div>

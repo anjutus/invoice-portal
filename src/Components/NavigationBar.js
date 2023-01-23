@@ -29,8 +29,8 @@ const pages = [
                     menuLinkName: "/viewInvoices"
                 },
                 {
-                    menuName:"Create Invoices",
-                    menuLinkName: "/createInvoices"
+                    menuName:"Create Invoice",
+                    menuLinkName: "/createInvoice"
                 },
                 {   
                     menuName:"Inquires",
