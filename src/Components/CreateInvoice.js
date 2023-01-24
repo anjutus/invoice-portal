@@ -87,11 +87,14 @@ export default function CreateInvoice() {
     const [amount, setAmount] = useState(null);
     const [tax, setTax] = useState(null);
     const [totalAmount, setTotalAmount] = useState(null);
+    // function displayAmount(){
+    //     setAmount(Number(quantity)*Number(price))
+    // }
 
     return (
-        <Container sx={{ pt: 4, }} >
+        <Container sx={{ pt: 4}}  >
             <Paper >
-                <Box px={3} py={2} >
+                <Box px={3} py={2} sx={{backgroundColor: '#FFFDEB' }}>
                     <Typography variant="h6" align="center" margin="dense">
                         Create new Invoice
                     </Typography>
@@ -198,7 +201,10 @@ export default function CreateInvoice() {
                                     label="Quantity"
                                     fullWidth
                                     margin="dense"
-                                />
+                                    onChange={(event)=>{
+                                        setquantity(event.target.value);
+                                    }}
+                                ></TextField>
                             </Grid>
                             <Grid item xs={12} sm={2}>
                                 <TextField
@@ -211,6 +217,9 @@ export default function CreateInvoice() {
                                     label="Price"
                                     fullWidth
                                     margin="dense"
+                                    onChange={(event)=>{
+                                        setPrice(event.target.value);
+                                    }}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={2}>
@@ -218,7 +227,6 @@ export default function CreateInvoice() {
                                     sx={{
                                         bgcolor: 'white',
                                     }}
-                                    required
                                     id="amount"
                                     name="amount"
                                     label="Amount"
@@ -241,7 +249,7 @@ export default function CreateInvoice() {
                     </Box>
 
                     {/* Create Invoice Payment */}
-                    <Box sx={{
+                    <Box mt={3} sx={{
                             bgcolor: '#DFECC3',
                             boxShadow: 1,
                             borderRadius: 2,

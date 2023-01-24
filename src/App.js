@@ -3,7 +3,7 @@ import NavigationBar from './Components/NavigationBar';
 import DashboardApp from './Components/Dashboard/DashboardApp';
 import { BrowserRouter as Router, Routes,Route } from "react-router-dom";
 import ListInvoices from './Components/ViewInvoices/ListInvoices';
-import CreateInvoice from './Components/CreateInvoice';
+import CreateInvoice from './Components/CreateInvoiceNew';
 
 function App() {
   return (
