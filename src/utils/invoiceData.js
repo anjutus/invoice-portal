@@ -1,24 +1,23 @@
-export const invoiceData =
-{
+export const Invoices = [
+    {
 
-    invoiceID: "",
-    supplierName: "",
-    issueDate: "",
-    dueDate: "",
-    comments: "",
-    invoiceStatus: "",
-    payment: {
-        taxes: 0,
-        discount: 0,
-        totalAmount: 0
-    },
-    invoiceProductDetails: [{
-        productID: 0,
-        productName: "",
-        quantity: 0,
-        price: 0,
-        lineTotal: 0
-    }]
-}
-
-
+        invoiceID: 0,
+        supplierName: "",
+        issueDate: "",
+        dueDate: "",
+        comments: "",
+        status:"",
+        payment: {
+            taxes: 0,
+            discount: 0,
+            totalAmount: 0
+        },
+        invoiceProductDetails: [{
+            productID: 0,
+            name: "",
+            quantity: 0,
+            price: 0,
+            lineTotal: 0
+        }]
+    }
+]
