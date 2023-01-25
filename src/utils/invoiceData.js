@@ -1,4 +1,4 @@
-export const Invoices = [
+export const invoiceData = 
     {
 
         invoiceID: 0,
@@ -14,10 +14,10 @@ export const Invoices = [
         },
         invoiceProductDetails: [{
             productID: 0,
-            name: "",
-            quantity: 0,
-            price: 0,
+            productName: "",
+            productQuantity: 0,
+            productPrice: 0,
             lineTotal: 0
         }]
     }
-]
+

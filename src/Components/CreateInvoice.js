@@ -4,72 +4,72 @@ import { Paper, Box, Grid, TextField, Typography, Button, Container } from '@mui
 //Add new Product component
 const AddNewProduct = () => {
     return (<Grid container spacing={1}>
-                <Grid item xs={6} sm={1.5}>
-                    <TextField
-                        sx={{
-                            bgcolor: 'white',
-                            }}
-                        required
-                        id="productId"
-                        name="productId"
-                        label="Product ID"
-                        fullWidth
-                        margin="dense"
-                    />
-                </Grid>
-                <Grid item xs={12} sm={5}>
-                    <TextField
-                        sx={{
-                            bgcolor: 'white',
-                        }}
-                        required
-                        id="productName"
-                        name="productName"
-                        label="Product Name"
-                        fullWidth
-                        margin="dense"
-                    />
-                </Grid>
-                <Grid item xs={12} sm={1.5}>
-                    <TextField
-                        sx={{
-                            bgcolor: 'white',
-                        }}
-                        required
-                        id="quantity"
-                        name="quantity"
-                        label="Quantity"
-                        fullWidth
-                        margin="dense"
-                    />
-                </Grid>
-                <Grid item xs={12} sm={2}>
-                    <TextField
-                        sx={{
-                            bgcolor: 'white',
-                        }}
-                        required
-                        id="price"
-                        name="price"
-                        label="Price"
-                        fullWidth
-                        margin="dense"
-                    />
-                </Grid>
-                <Grid item xs={12} sm={2}>
-                    <TextField
-                        sx={{
-                            bgcolor: 'white',
-                        }}
-                        required
-                        id="amount"
-                        name="amount"
-                        label="Amount"
-                        fullWidth
-                        margin="dense"
-                    />
-                </Grid>
-            </Grid>);
+        <Grid item xs={6} sm={1.5}>
+            <TextField
+                sx={{
+                    bgcolor: 'white',
+                }}
+                required
+                id="productId"
+                name="productId"
+                label="Product ID"
+                fullWidth
+                margin="dense"
+            />
+        </Grid>
+        <Grid item xs={12} sm={5}>
+            <TextField
+                sx={{
+                    bgcolor: 'white',
+                }}
+                required
+                id="productName"
+                name="productName"
+                label="Product Name"
+                fullWidth
+                margin="dense"
+            />
+        </Grid>
+        <Grid item xs={12} sm={1.5}>
+            <TextField
+                sx={{
+                    bgcolor: 'white',
+                }}
+                required
+                id="quantity"
+                name="quantity"
+                label="Quantity"
+                fullWidth
+                margin="dense"
+            />
+        </Grid>
+        <Grid item xs={12} sm={2}>
+            <TextField
+                sx={{
+                    bgcolor: 'white',
+                }}
+                required
+                id="price"
+                name="price"
+                label="Price"
+                fullWidth
+                margin="dense"
+            />
+        </Grid>
+        <Grid item xs={12} sm={2}>
+            <TextField
+                sx={{
+                    bgcolor: 'white',
+                }}
+                required
+                id="amount"
+                name="amount"
+                label="Amount"
+                fullWidth
+                margin="dense"
+            />
+        </Grid>
+    </Grid>);
 };
 
 export default function CreateInvoice() {
@@ -92,34 +92,35 @@ export default function CreateInvoice() {
     // }
 
     return (
-        <Container sx={{ pt: 4}}  >
+        <Container sx={{ pt: 4 }}  >
             <Paper >
-                <Box px={3} py={2} sx={{backgroundColor: '#FFFDEB' }}>
+                <Box px={3} py={2} sx={{ backgroundColor: '#FFFDEB' }}>
                     <Typography variant="h6" align="center" margin="dense">
                         Create new Invoice
                     </Typography>
                     {/* Invoice Header */}
                     <Box sx={{
-                            bgcolor: '#DFECC3',
-                            boxShadow: 1,
-                            borderRadius: 2,
-                            p: 2,
-                            }}>
+                        bgcolor: '#DFECC3',
+                        boxShadow: 1,
+                        borderRadius: 2,
+                        p: 2,
+                    }}>
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={3}>
-                                <TextField
-                                    sx={{
-                                        bgcolor: 'white',
-                                    }}
+                                <FormLabel>Invoice ID </FormLabel>
+                                <TextField sx={{
+                                    bgcolor: 'white',
+                                }}
                                     required
-                                    id="invoiceId"
-                                    name="invoiceId"
-                                    label="Invoice ID"
+                                    id="invoiceID"
+                                    name="invoiceID"
                                     fullWidth
                                     margin="dense"
-                                />
+                                    onChange={(e) => handleHeaderInputChange(e)}
+                                ></TextField>
                             </Grid>
                             <Grid item xs={12} sm={3}>
+                                <FormLabel>Supplier Name</FormLabel>
                                 <TextField
                                     sx={{
                                         bgcolor: 'white',
@@ -130,33 +131,33 @@ export default function CreateInvoice() {
                                     label="Supplier Name"
                                     fullWidth
                                     margin="dense"
+                                    onChange={(e) => handleHeaderInputChange(e)}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={3}>
-                                <TextField
-                                    sx={{
-                                        bgcolor: 'white',
-                                    }}
-                                    required
-                                    id="issueDate"
-                                    name="issueDate"
-                                    label="Issue Date"
-                                    fullWidth
-                                    margin="dense"
-                                />
+                                <FormLabel>Issue Date</FormLabel>
+                                <LocalizationProvider id dateAdapter={AdapterDayjs}>
+                                    <DatePicker
+                                        disableFuture
+                                        openTo="year"
+                                        views={['year', 'month', 'day']}
+                                        onChange={(e) => handleHeaderInputChange(e, "issueDate")}
+                                        renderInput={(params) => <TextField {...params} sx={{ bgcolor: 'white', }} />}
+                                    />
+                                </LocalizationProvider>
                             </Grid>
                             <Grid item xs={12} sm={3}>
-                                <TextField
-                                    sx={{
-                                        bgcolor: 'white',
-                                    }}
-                                    required
-                                    id="dueDate"
-                                    name="dueDate"
-                                    label="Due Date"
-                                    fullWidth
-                                    margin="dense"
-                                />
+                                <FormLabel>Due Date</FormLabel>
+                                <LocalizationProvider id dateAdapter={AdapterDayjs}>
+                                    <DatePicker
+                                        sx
+                                        disableFuture
+                                        openTo="year"
+                                        views={['year', 'month', 'day']}
+                                        onChange={(e) => handleHeaderInputChange(e, "dueDate")}
+                                        renderInput={(params) => <TextField {...params} sx={{ bgcolor: 'white', }} />}
+                                    />
+                                </LocalizationProvider>
                             </Grid>
                         </Grid>
                     </Box>
@@ -164,97 +165,111 @@ export default function CreateInvoice() {
                     {/* Create Invoice Add new Product  */}
                     <Box mt={3} sx={{ bgcolor: '#DFECC3', boxShadow: 1, borderRadius: 2, p: 2, }}>
                         <Grid container spacing={1}>
-                            <Grid item xs={6} sm={1.5}>
-                                <TextField
-                                    sx={{
-                                        bgcolor: 'white',
-                                    }}
-                                    required
-                                    id="productId"
-                                    name="productId"
-                                    label="Product ID"
-                                    fullWidth
-                                    margin="dense"
-                                />
+                            <Grid item>
+                                <Grid item xs={6} sm={1.5}>
+                                    <FormLabel>Product ID</FormLabel>
+                                </Grid>
+                                <Grid item xs={6} sm={6}>
+                                    <FormLabel>Product Name</FormLabel>
+                                </Grid>
+                                <Grid item xs={6} sm={1.5}>
+                                    <FormLabel>Quantity</FormLabel>
+                                </Grid>
+                                <Grid item xs={6} sm={1.5}>
+                                    <FormLabel>Price</FormLabel>
+                                </Grid>
+                                <Grid item xs={6} sm={1.5}>
+                                    <FormLabel>Amount</FormLabel>
+                                </Grid>
                             </Grid>
-                            <Grid item xs={12} sm={5}>
-                                <TextField
-                                    sx={{
-                                        bgcolor: 'white',
-                                    }}
-                                    required
-                                    id="productName"
-                                    name="productName"
-                                    label="Product Name"
-                                    fullWidth
-                                    margin="dense"
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={1.5}>
-                                <TextField
-                                    sx={{
-                                        bgcolor: 'white',
-                                    }}
-                                    required
-                                    id="quantity"
-                                    name="quantity"
-                                    label="Quantity"
-                                    fullWidth
-                                    margin="dense"
-                                    onChange={(event)=>{
-                                        setquantity(event.target.value);
-                                    }}
-                                ></TextField>
-                            </Grid>
-                            <Grid item xs={12} sm={2}>
-                                <TextField
-                                    sx={{
-                                        bgcolor: 'white',
-                                    }}
-                                    required
-                                    id="price"
-                                    name="price"
-                                    label="Price"
-                                    fullWidth
-                                    margin="dense"
-                                    onChange={(event)=>{
-                                        setPrice(event.target.value);
-                                    }}
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={2}>
-                                <TextField
-                                    sx={{
-                                        bgcolor: 'white',
-                                    }}
-                                    id="amount"
-                                    name="amount"
-                                    label="Amount"
-                                    fullWidth
-                                    margin="dense"
-                                />
-                            </Grid>
+                            
+                             <Grid item key={index} >
+                                {invoiceData.invoiceProductDetails.map((item, index) => (
+                                    <><Grid item xs={6} sm={1.5}>
+                                        <TextField
+                                            sx={{
+                                                bgcolor: 'white',
+                                                width: '40'
+                                            }}
+                                            required
+                                            id="productID"
+                                            name="productID"
+                                            margin="dense"
+                                            onChange={(e) => handleProductInputChange(e, index)} />
+                                    </Grid><Grid item xs={6} sm={6}>
+                                            <TextField
+                                                sx={{
+                                                    bgcolor: 'white',
+                                                }}
+                                                required
+                                                id="productName"
+                                                name="productName"
+                                                fullWidth
+                                                margin="dense"
+                                                onChange={(e) => handleProductInputChange(e, index)} />
+                                        </Grid>
+                                        <Grid item xs={6} sm={1.5}>
+                                        
+                                                <TextField
+                                                    sx={{
+                                                        bgcolor: 'white',
+                                                    }}
+                                                    required
+                                                    id="productQuantity"
+                                                    name="productQuantity"
+                                                    fullWidth
+                                                    margin="dense"
+                                                    onChange={(e) => handleProductInputChange(e, index)}
+                                                />
+                                        </Grid>
+                                        <Grid item xs={6} sm={1.5}>
+                                        <TextField
+                                                    sx={{
+                                                        bgcolor: 'white',
+                                                    }}
+                                                    required
+                                                    id="productPrice"
+                                                    name="productPrice"
+                                                    fullWidth
+                                                    margin="dense"
+                                                    onChange={(e) => handleProductInputChange(e, index)}
+                                                />
+                                        </Grid>
+                                        <Grid item xs={6} sm={1.5}>
+                                        <TextField
+                                                    sx={{
+                                                        bgcolor: 'white',
+                                                    }}
+                                                    required
+                                                    id="lineTotal"
+                                                    name="lineTotal"
+                                                    fullWidth
+                                                    margin="dense"
+                                                    onChange={(e) => handleProductInputChange(e, index)}
+                                                />
+                                        </Grid></>
+                                ))}
+                            </Grid>      
 
-                            {newAddProductList}
                             <Box mt={3} marginLeft={2}>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={onAddBtnClick}
-                                >
-                                    Add New Product
-                                </Button>
-                            </Box>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={onAddBtnClick}
+                                    >
+                                        Add New Product
+                                    </Button>
+                                </Box>
                         </Grid>
                     </Box>
 
                     {/* Create Invoice Payment */}
                     <Box mt={3} sx={{
-                            bgcolor: '#DFECC3',
-                            boxShadow: 1,
-                            borderRadius: 2,
-                            p: 2,
-                            }}>
+                        bgcolor: '#DFECC3',
+                        boxShadow: 1,
+                        borderRadius: 2,
+                        p: 2,
+                    }}>
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={4}>
                                 <TextField
