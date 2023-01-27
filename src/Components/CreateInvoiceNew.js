@@ -75,20 +75,18 @@ export default function CreateInvoiceNew() {
     //Update the current state with input value from a Add product component
     const handleProductInputChange = (e, index) => {
         const { name, value } = e.target
-        // const list = [...formData.invoiceData.invoiceProductDetails]
-        // list[index][name] = value
-        // setFormData(list)
-        if (name === "productID") {
+
+        if (name === ('invoiceProductDetails.'+index+'.productID')) {
             formData.invoiceData.invoiceProductDetails[index].productID = value;
         }
-        else if (name === "productName") {
+        else if (name === ('invoiceProductDetails.'+index+ '.productName')) {
             formData.invoiceData.invoiceProductDetails[index].productName = value;
         }
-        else if (name === "productQuantity") {
+        else if (name === ('invoiceProductDetails.'+index+'.productQuantity')) {
             formData.invoiceData.invoiceProductDetails[index].productQuantity = value;
             // formCalculation(formData)
         }
-        else if (name === "productPrice") {
+        else if (name === ('invoiceProductDetails.'+index+'.productPrice')) {
             formData.invoiceData.invoiceProductDetails[index].productPrice = value;
             // formCalculation(formData)
         }
@@ -310,11 +308,11 @@ export default function CreateInvoiceNew() {
                                                             name="productID"
                                                             margin="dense"
                                                             size="small"
-                                                            {...register('productID'+index)}
-                                                            error={errors.productID+index ? true : false}
+                                                            {...register(`invoiceProductDetails.${index}.productID`)}
+                                                            error={errors.invoiceProductDetails?.[index]?.productID? true : false}
                                                             onChange={(e) => handleProductInputChange(e, index)} />
                                                         <Typography sx={{ fontSize: '10px' }} color="textSecondary">
-                                                            {errors.productID+index?.message}
+                                                            {errors.invoiceProductDetails?.[index]?.productID?.message}
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item xs={5} sm={5}>
@@ -328,11 +326,11 @@ export default function CreateInvoiceNew() {
                                                             fullWidth
                                                             margin="dense"
                                                             size="small"
-                                                            {...register('productName'+index)}
-                                                            error={errors.productName+index ? true : false}
+                                                            {...register(`invoiceProductDetails.${index}.productName`)}
+                                                            error={errors.invoiceProductDetails?.[index]?.productName? true : false}
                                                             onChange={(e) => handleProductInputChange(e, index)} />
                                                         <Typography sx={{ fontSize: '10px' }} color="textSecondary">
-                                                            {errors.productName+index?.message}
+                                                            {errors.invoiceProductDetails?.[index]?.productName?.message}
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item xs={1} sm={1}>
@@ -347,12 +345,12 @@ export default function CreateInvoiceNew() {
                                                             fullWidth
                                                             margin="dense"
                                                             size="small"
-                                                            {...register('productQuantity'+index)}
-                                                            error={errors.productName+index ? true : false}
+                                                            {...register(`invoiceProductDetails.${index}.productQuantity`)}
+                                                            error={errors.invoiceProductDetails?.[index]?.productQuantity? true : false}
                                                             onChange={(e) => handleProductInputChange(e, index)}
                                                         />
                                                         <Typography sx={{ fontSize: '10px' }} color="textSecondary">
-                                                            {errors.productQuantity+index?.message}
+                                                            {errors.invoiceProductDetails?.[index]?.productQuantity?.message}
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item xs={1.5} sm={1.5}>
@@ -366,12 +364,12 @@ export default function CreateInvoiceNew() {
                                                             fullWidth
                                                             margin="dense"
                                                             size="small"
-                                                            {...register('productPrice'+index)}
-                                                            error={errors.productPrice+index ? true : false}
+                                                            {...register(`invoiceProductDetails.${index}.productPrice`)}
+                                                            error={errors.invoiceProductDetails?.[index]?.productPrice? true : false}
                                                             onChange={(e) => handleProductInputChange(e, index)}
                                                         />
                                                         <Typography sx={{ fontSize: '10px' }} color="textSecondary">
-                                                            {errors.productPrice+index?.message}
+                                                            {errors.invoiceProductDetails?.[index]?.productPrice?.message}
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item xs={1.5} sm={1.5}>

@@ -14,6 +14,9 @@ export const formValidationSchema = Yup.object().shape({
    .required('Issue Date is required'),
    dueDate: Yup.mixed()
    .required('Due Date is required'),
+
+   invoiceProductDetails: Yup.array().of(
+    Yup.object().shape({
     productID :Yup.number()
     .required('Product ID is required')
     .transform((_, val) => (val !== "" ? Number(val) : null))
@@ -28,6 +31,7 @@ export const formValidationSchema = Yup.object().shape({
     .required('Product price is required')
     .transform((_, val) => (val !== "" ? Number(val) : null))
     .nullable(),
+    })),
     tax :Yup.number()
     .required('Tax details is required')
     .transform((_, val) => (val !== "" ? Number(val) : null))
