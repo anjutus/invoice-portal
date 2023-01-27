@@ -7,7 +7,7 @@ export const invoiceData =
         dueDate: "",
         status:"",
         payment: {
-            taxes: 0,
+            tax: 0,
             discount: 0,
             comment: "",
             totalAmount: 0

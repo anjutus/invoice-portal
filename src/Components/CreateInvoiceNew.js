@@ -7,6 +7,9 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { formValidationSchema } from '../utils/formValidationSchema';
+import { FormCalculation } from '../utils/FormCalculation';
+import PercentIcon from '@mui/icons-material/Percent';
+import InputAdornment from '@mui/material/InputAdornment';
 import * as Yup from 'yup';
 
 export default function CreateInvoiceNew() {
@@ -16,25 +19,8 @@ export default function CreateInvoiceNew() {
     }
     );
 
-
-    // const formCalculation = (formDataInput) => {
-
-    //     console.log(JSON.stringify(formDataInput))
-    //     // formDataInput.map( (item) =>({ })
-    //     // formDataInput.invoiceData.invoiceProductDetails.map((item) => ())
-    //     var lineTotal =0;
-    //     formDataInput.invoiceData.invoiceProductDetails.map((item) => 
-        
-    //     item.lineTotal=item.productQuantity*item.productPrice
-    //     lineTotal=lineTotal+item.lineTotal
-        
-    //     )
-
-    //     formDataInput.invoiceData.payment.totalAmount=lineTotal+ (lineTotal * (formDataInput.invoiceData.payment.tax/100)) - formDataInput.invoiceData.payment.discount
-    //     // =lineTotal
-    //     console.log(JSON.stringify(formDataInput))
-    //     // return formDataInput
-    // }
+    
+    
     //Update the current state with input value from a header component
     const handleHeaderInputChange = (e, ...elementName) => {
         var date = new Date(e);
@@ -52,13 +38,13 @@ export default function CreateInvoiceNew() {
             else if (name === "supplierName")
                 formData.invoiceData.supplierName = value
             else if (name === "tax") {
-                formData.invoiceData.payment.taxes = value
-                // formCalculation(formData)
+                formData.invoiceData.payment.tax = value
+                 FormCalculation(formData)
             }
             else if (name === "discount") {
 
                 formData.invoiceData.payment.discount = value
-                // formCalculation(formData)
+                 FormCalculation(formData)
             }
             else if (name === "comment") {
                 formData.invoiceData.payment.comment = value
@@ -84,14 +70,14 @@ export default function CreateInvoiceNew() {
         }
         else if (name === ('invoiceProductDetails.'+index+'.productQuantity')) {
             formData.invoiceData.invoiceProductDetails[index].productQuantity = value;
-            // formCalculation(formData)
+            FormCalculation(formData)
         }
         else if (name === ('invoiceProductDetails.'+index+'.productPrice')) {
             formData.invoiceData.invoiceProductDetails[index].productPrice = value;
-            // formCalculation(formData)
+            FormCalculation(formData)
         }
-        // else if (name === "lineTotal")
-        //     formData.invoiceData.invoiceProductDetails[index].lineTotal = value;
+        else if (name === "lineTotal")
+        formData.invoiceData.invoiceProductDetails[index].lineTotal = value;
         //console.log( JSON.stringify(formData))
         setFormData(oldFormData => ({
             ...oldFormData,
@@ -249,7 +235,6 @@ export default function CreateInvoiceNew() {
                                                     fieldState: { invalid }
                                                 }) => (
                                                     <DatePicker
-                                                        disableFuture
                                                         openTo="year"
                                                         views={['year', 'month', 'day']}
                                                         value={formData.invoiceData.dueDate}
@@ -383,7 +368,7 @@ export default function CreateInvoiceNew() {
                                                             fullWidth
                                                             margin="dense"
                                                             size="small"
-                                                            // value={formData.invoiceData.invoiceProductDetails[index].lineTotal}
+                                                           value={formData.invoiceData.invoiceProductDetails[index].lineTotal}
                                                             onChange={(e) => handleProductInputChange(e, index)}
                                                         />
                                                     </Grid>
@@ -436,6 +421,12 @@ export default function CreateInvoiceNew() {
                                             {...register('tax')}
                                             error={errors.tax ? true : false}
                                             onChange={(e) => handleHeaderInputChange(e)}
+                                            InputProps={{
+                                                endAdornment: (
+                                                  <InputAdornment disableTypography position="end" >
+                                                    <PercentIcon sx={{fontSize:'15px'}} />
+                                                  </InputAdornment>
+                                                ),}}
                                         />
                                         <Typography sx={{ fontSize: '10px' }} color="textSecondary">
                                             {errors.tax?.message}
@@ -468,6 +459,7 @@ export default function CreateInvoiceNew() {
                                             fullWidth
                                             margin="dense"
                                             size="small"
+                                            value={formData.invoiceData.payment.totalAmount}
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={12} sx={{ textAlign: 'left' }}>
@@ -502,5 +494,4 @@ export default function CreateInvoiceNew() {
             </FormControl>
         </div>
     )
-
-}
+                                        }
