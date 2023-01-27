@@ -1,14 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
 import NavigationBar from './Components/NavigationBar';
-import { Dashboard } from '@mui/icons-material';
-import DashboardApp from './Components/DashboardApp';
+import DashboardApp from './Components/Dashboard/DashboardApp';
+import { BrowserRouter as Router, Routes,Route } from "react-router-dom";
+import ListInvoices from './Components/ViewInvoices/ListInvoices';
+import CreateInvoice from './Components/CreateInvoiceNew';
 
 function App() {
   return (
     <div className="App">
-      <NavigationBar/>
-      <DashboardApp/>
+        <Router>
+            <NavigationBar/>
+            <Routes>
+              <Route exact path="/" element={<DashboardApp />} />
+              <Route path="viewInvoices" element={<ListInvoices />} />
+              <Route path="createInvoice" element={<CreateInvoice />} />
+            </Routes>
+        </Router>
     </div>
   );
 }

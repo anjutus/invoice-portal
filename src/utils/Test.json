@@ -1,0 +1,31 @@
+{
+    "invoiceData": {
+        "invoiceID": "23232",
+        "supplierName": "cvbcbcvb",
+        "issueDate": "5/2/2022",
+        "dueDate": "8/11/2021",
+        "comments": "",
+        "status": "",
+        "payment": {
+            "taxes": 0,
+            "discount": 0,
+            "totalAmount": 0
+        },
+        "invoiceProductDetails": [
+            {
+                "productID": "2",
+                "productName": "vfgdfg",
+                "productQuantity": 0,
+                "productPrice": 0,
+                "lineTotal": 0
+            },
+            {
+                "productID": "3",
+                "productName": "fdbdfberf",
+                "productQuantity": 0,
+                "productPrice": 0,
+                "lineTotal": 0
+            }
+        ]
+    }
+}

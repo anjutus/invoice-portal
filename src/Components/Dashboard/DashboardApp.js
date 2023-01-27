@@ -1,18 +1,16 @@
 /*
-***
-@author: 
+*Dashboard Page for Supplier displaying Pie Chart of invoice status and imvoice amount.
+**@author: Anju Tuscano
+
 */
 
-import { Grid, Container, Typography } from '@mui/material';
+import { Grid, Container} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import PieChart from "./PieChart";
-
-import { InvoiceData } from "../utils/PieData";
-import { properties } from '../utils/properties.js';
-
-import { reusableFunctions } from '../utils/reusableFunctions.js';
+import { InvoiceData } from "../../utils/PieData";
+import { properties } from '../../utils/properties.js';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -21,7 +19,6 @@ const Item = styled(Paper)(({ theme }) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
 }));
-
 
 
 export const numofInvoiceAmountData = {
@@ -71,9 +68,7 @@ export default function DashboardApp() {
 
     return (
         <Container maxWidth="xl">
-            <Grid container spacing={8} alignItems="center"
-                justifyContent="center" paddingTop={8}>
-
+            <Grid container spacing={8} alignItems="center" justifyContent="center" paddingTop={8}>
                 <Grid item xs={12} md={6} lg={4}>
                     <Box sx={{width: '80%',}}>
                         <Item>
