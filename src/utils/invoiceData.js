@@ -5,11 +5,11 @@ export const invoiceData =
         supplierName: "",
         issueDate: "",
         dueDate: "",
-        comments: "",
         status:"",
         payment: {
             taxes: 0,
             discount: 0,
+            comment: "",
             totalAmount: 0
         },
         invoiceProductDetails: [{
