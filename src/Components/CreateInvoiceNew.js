@@ -11,7 +11,6 @@ import { FormCalculation } from '../utils/FormCalculation';
 import PercentIcon from '@mui/icons-material/Percent';
 import InputAdornment from '@mui/material/InputAdornment';
 import * as Yup from 'yup';
-import { NumericFormat } from 'react-number-format';
 
 export default function CreateInvoiceNew() {
     //set a blank Invoice Data in a Create Form state
