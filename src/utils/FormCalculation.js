@@ -13,7 +13,7 @@ export function FormCalculation(data) {
 
     })
     if (data.invoiceData.payment.tax >= "1") {
-      data.invoiceData.payment.totalAmount = (lineTotal - (lineTotal * (data.invoiceData.payment.tax / 100))) + +data.invoiceData.payment.discount;
+      data.invoiceData.payment.totalAmount = (lineTotal - (lineTotal * (data.invoiceData.payment.tax / 100))) - data.invoiceData.payment.discount;
     }
     return data
   }

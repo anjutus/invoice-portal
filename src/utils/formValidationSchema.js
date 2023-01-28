@@ -36,5 +36,11 @@ export const formValidationSchema = Yup.object().shape({
     .required('Tax details is required')
     .transform((_, val) => (val !== "" ? Number(val) : null))
     .nullable(),
-   
+    totalAmount :Yup.number()
+    .required('Invoice Total cannot be less than zero')
+    .test(
+      'Is positive?', 
+      'ERROR: Invoice Total cannot be less than zero', 
+      (value) => value > 0
+    )
   });

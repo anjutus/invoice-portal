@@ -11,6 +11,7 @@ import { FormCalculation } from '../utils/FormCalculation';
 import PercentIcon from '@mui/icons-material/Percent';
 import InputAdornment from '@mui/material/InputAdornment';
 import * as Yup from 'yup';
+import { NumericFormat } from 'react-number-format';
 
 export default function CreateInvoiceNew() {
     //set a blank Invoice Data in a Create Form state
@@ -20,7 +21,8 @@ export default function CreateInvoiceNew() {
     );
 
     
-    
+
+
     //Update the current state with input value from a header component
     const handleHeaderInputChange = (e, ...elementName) => {
         var date = new Date(e);
@@ -39,12 +41,12 @@ export default function CreateInvoiceNew() {
                 formData.invoiceData.supplierName = value
             else if (name === "tax") {
                 formData.invoiceData.payment.tax = value
-                 FormCalculation(formData)
+                FormCalculation(formData)
             }
             else if (name === "discount") {
 
                 formData.invoiceData.payment.discount = value
-                 FormCalculation(formData)
+                FormCalculation(formData)
             }
             else if (name === "comment") {
                 formData.invoiceData.payment.comment = value
@@ -62,22 +64,22 @@ export default function CreateInvoiceNew() {
     const handleProductInputChange = (e, index) => {
         const { name, value } = e.target
 
-        if (name === ('invoiceProductDetails.'+index+'.productID')) {
+        if (name === ('invoiceProductDetails.' + index + '.productID')) {
             formData.invoiceData.invoiceProductDetails[index].productID = value;
         }
-        else if (name === ('invoiceProductDetails.'+index+ '.productName')) {
+        else if (name === ('invoiceProductDetails.' + index + '.productName')) {
             formData.invoiceData.invoiceProductDetails[index].productName = value;
         }
-        else if (name === ('invoiceProductDetails.'+index+'.productQuantity')) {
+        else if (name === ('invoiceProductDetails.' + index + '.productQuantity')) {
             formData.invoiceData.invoiceProductDetails[index].productQuantity = value;
             FormCalculation(formData)
         }
-        else if (name === ('invoiceProductDetails.'+index+'.productPrice')) {
+        else if (name === ('invoiceProductDetails.' + index + '.productPrice')) {
             formData.invoiceData.invoiceProductDetails[index].productPrice = value;
             FormCalculation(formData)
         }
         else if (name === "lineTotal")
-        formData.invoiceData.invoiceProductDetails[index].lineTotal = value;
+            formData.invoiceData.invoiceProductDetails[index].lineTotal = value;
         //console.log( JSON.stringify(formData))
         setFormData(oldFormData => ({
             ...oldFormData,
@@ -289,12 +291,12 @@ export default function CreateInvoiceNew() {
                                                                 width: '40'
                                                             }}
                                                             required
-                                                            id={"productID"+index}
+                                                            id={"productID" + index}
                                                             name="productID"
                                                             margin="dense"
                                                             size="small"
                                                             {...register(`invoiceProductDetails.${index}.productID`)}
-                                                            error={errors.invoiceProductDetails?.[index]?.productID? true : false}
+                                                            error={errors.invoiceProductDetails?.[index]?.productID ? true : false}
                                                             onChange={(e) => handleProductInputChange(e, index)} />
                                                         <Typography sx={{ fontSize: '10px' }} color="textSecondary">
                                                             {errors.invoiceProductDetails?.[index]?.productID?.message}
@@ -306,13 +308,13 @@ export default function CreateInvoiceNew() {
                                                                 bgcolor: 'white',
                                                             }}
                                                             required
-                                                            id={"productName"+index}
+                                                            id={"productName" + index}
                                                             name="productName"
                                                             fullWidth
                                                             margin="dense"
                                                             size="small"
                                                             {...register(`invoiceProductDetails.${index}.productName`)}
-                                                            error={errors.invoiceProductDetails?.[index]?.productName? true : false}
+                                                            error={errors.invoiceProductDetails?.[index]?.productName ? true : false}
                                                             onChange={(e) => handleProductInputChange(e, index)} />
                                                         <Typography sx={{ fontSize: '10px' }} color="textSecondary">
                                                             {errors.invoiceProductDetails?.[index]?.productName?.message}
@@ -325,13 +327,13 @@ export default function CreateInvoiceNew() {
                                                                 bgcolor: 'white',
                                                             }}
                                                             required
-                                                            id={"productQuantity"+index}
+                                                            id={"productQuantity" + index}
                                                             name="productQuantity"
                                                             fullWidth
                                                             margin="dense"
                                                             size="small"
                                                             {...register(`invoiceProductDetails.${index}.productQuantity`)}
-                                                            error={errors.invoiceProductDetails?.[index]?.productQuantity? true : false}
+                                                            error={errors.invoiceProductDetails?.[index]?.productQuantity ? true : false}
                                                             onChange={(e) => handleProductInputChange(e, index)}
                                                         />
                                                         <Typography sx={{ fontSize: '10px' }} color="textSecondary">
@@ -344,13 +346,13 @@ export default function CreateInvoiceNew() {
                                                                 bgcolor: 'white',
                                                             }}
                                                             required
-                                                            id={"productPrice"+index}
+                                                            id={"productPrice" + index}
                                                             name="productPrice"
                                                             fullWidth
                                                             margin="dense"
                                                             size="small"
                                                             {...register(`invoiceProductDetails.${index}.productPrice`)}
-                                                            error={errors.invoiceProductDetails?.[index]?.productPrice? true : false}
+                                                            error={errors.invoiceProductDetails?.[index]?.productPrice ? true : false}
                                                             onChange={(e) => handleProductInputChange(e, index)}
                                                         />
                                                         <Typography sx={{ fontSize: '10px' }} color="textSecondary">
@@ -368,8 +370,9 @@ export default function CreateInvoiceNew() {
                                                             fullWidth
                                                             margin="dense"
                                                             size="small"
-                                                           value={formData.invoiceData.invoiceProductDetails[index].lineTotal}
+                                                            value={formData.invoiceData.invoiceProductDetails[index].lineTotal}
                                                             onChange={(e) => handleProductInputChange(e, index)}
+                                                            disabled={true}
                                                         />
                                                     </Grid>
                                                     <Grid item xs={0.5} sm={0.5}>
@@ -423,10 +426,11 @@ export default function CreateInvoiceNew() {
                                             onChange={(e) => handleHeaderInputChange(e)}
                                             InputProps={{
                                                 endAdornment: (
-                                                  <InputAdornment disableTypography position="end" >
-                                                    <PercentIcon sx={{fontSize:'15px'}} />
-                                                  </InputAdornment>
-                                                ),}}
+                                                    <InputAdornment disableTypography position="end" >
+                                                        <PercentIcon sx={{ fontSize: '15px' }} />
+                                                    </InputAdornment>
+                                                ),
+                                            }}
                                         />
                                         <Typography sx={{ fontSize: '10px' }} color="textSecondary">
                                             {errors.tax?.message}
@@ -460,7 +464,15 @@ export default function CreateInvoiceNew() {
                                             margin="dense"
                                             size="small"
                                             value={formData.invoiceData.payment.totalAmount}
-                                        />
+                                            {...register('totalAmount')}
+                                            error={errors.totalAmount ? true : false}
+                                            disabled={true}
+                                        >
+                                            
+                                        </TextField>
+                                        <Typography color="textSecondary" sx={{ fontSize: '10px' }}>
+                                            {errors.totalAmount?.message}
+                                        </Typography>
                                     </Grid>
                                     <Grid item xs={12} sm={12} sx={{ textAlign: 'left' }}>
                                         <FormLabel sx={{}}>Comment</FormLabel>
@@ -494,4 +506,4 @@ export default function CreateInvoiceNew() {
             </FormControl>
         </div>
     )
-                                        }
+}
