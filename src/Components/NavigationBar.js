@@ -3,7 +3,7 @@
 **@author: Anju Tuscano
 
 */
-
+// Responsive Navigation Bar component
 
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
@@ -23,6 +23,7 @@ import Logo from '../Media/InvoicePortalLogo.png'
 import { deepOrange } from '@mui/material/colors';
 import { Link as ReactLink } from "react-router-dom";
 
+//Menu name array list
 const pages = [
                 {  
                     menuName:"View Invoices",
@@ -38,9 +39,11 @@ const pages = [
                 }
             ];
 
+//Srtting name array list
 const settings = ['Profile', 'Account', 'Logout'];
 
 function NavigationBar() {
+
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -110,11 +113,12 @@ function NavigationBar() {
                         >
                             {pages.map((page) => (
                                 <MenuItem key={page.menuLinkName} onClick={handleCloseNavMenu}>
-                                    <ReactLink to={page.menuLinkName}> <Typography textAlign="center">{page.menuName}</Typography></ReactLink>
+                                    <ReactLink to={page.menuLinkName}  style={{textDecoration:'none'}}> <Typography textAlign="center">{page.menuName}</Typography></ReactLink>
                                 </MenuItem>
                             ))}
                         </Menu>
                     </Box>
+                    {/* For Large Screen Device */}
                     <Link
                         href="#"
                         underline="none"
@@ -150,7 +154,7 @@ function NavigationBar() {
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
-                            <ReactLink to={page.menuLinkName}><Button
+                            <ReactLink to={page.menuLinkName} style={{textDecoration:'none'}}><Button
                                 key={page.menuName}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}

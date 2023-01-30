@@ -60,6 +60,9 @@ export default function CreateInvoiceNew() {
     }
 
     //Update the current state with input value from a Add product component
+
+    var currencyFormatter = require('currency-formatter');
+
     const handleProductInputChange = (e, index) => {
         const { name, value } = e.target
 
@@ -369,7 +372,7 @@ export default function CreateInvoiceNew() {
                                                             fullWidth
                                                             margin="dense"
                                                             size="small"
-                                                            value={formData.invoiceData.invoiceProductDetails[index].lineTotal}
+                                                            value={currencyFormatter.format(formData.invoiceData.invoiceProductDetails[index].lineTotal, { code: 'USD' })}
                                                             onChange={(e) => handleProductInputChange(e, index)}
                                                             disabled={true}
                                                         />
@@ -462,7 +465,7 @@ export default function CreateInvoiceNew() {
                                             fullWidth
                                             margin="dense"
                                             size="small"
-                                            value={formData.invoiceData.payment.totalAmount}
+                                            value={currencyFormatter.format(formData.invoiceData.payment.totalAmount, { code: 'USD' })}
                                             {...register('totalAmount')}
                                             error={errors.totalAmount ? true : false}
                                             disabled={true}
