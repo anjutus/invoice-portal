@@ -6,7 +6,7 @@ export const formValidationSchema = Yup.object().shape({
     invoiceID: Yup.number()
     .transform((_, val) => (val !== "" ? Number(val) : null))
     .nullable()
-    //.integer(0,'Invoice ID should be in muneric form')
+    .typeError('Invoice ID should be Numeric')
     .required('Invoice ID number is required'),
     supplierName: Yup.string()
    .required('Supplier Name is required'),
@@ -19,16 +19,23 @@ export const formValidationSchema = Yup.object().shape({
     Yup.object().shape({
     productID :Yup.number()
     .required('Product ID is required')
+    .typeError('Invoice ID should be Numeric')
     .transform((_, val) => (val !== "" ? Number(val) : null))
     .nullable(),
     productName :Yup.string()
     .required('Product Name is required'),
     productQuantity :Yup.number()
     .required('Product quantity is required')
+    .typeError('Invoice ID should be Numeric')
     .transform((_, val) => (val !== "" ? Number(val) : null))
     .nullable(),
     productPrice :Yup.number()
     .required('Product price is required')
+    .typeError('Please enter correct price')
+    .transform((_, val) => (val !== "" ? Number(val) : null))
+    .nullable(),
+    lineTotal :Yup.number()
+    .typeError('Please enter correct price')
     .transform((_, val) => (val !== "" ? Number(val) : null))
     .nullable(),
     })),

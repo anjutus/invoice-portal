@@ -1,3 +1,12 @@
+# Invoice Portal App
+Invoice Portal is automated system for generating and processing invoices.A supplier can create a invoice and get the details of his invoices.A buyer can view the invoices he received and approve or reject them.
+
+## Table of contents
+* [General Information](#general-information)
+
+## General Information
+Invoice Portal is automated system for generating and processing invoices.A supplier can create a invoice and get the details of his invoices.A buyer can view the invoices he received and approve or reject them.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
