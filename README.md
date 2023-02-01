@@ -1,17 +1,30 @@
 # Invoice Portal App
-Invoice Portal is automated system for generating and processing invoices.A supplier can create a invoice and get the details of his invoices.A buyer can view the invoices he received and approve or reject them.
+Invoice Portal is automated system for generating and processing invoices..
 
 ## Table of contents
 * [General Information](#general-information)
+* [Technologies](#technologies)
+* [Setup](#setup)
+* [Illustrations](#illustrations)
+* [Project Status](#project-status)
+* [Sources](#Sources)
+
 
 ## General Information
-Invoice Portal is automated system for generating and processing invoices.A supplier can create a invoice and get the details of his invoices.A buyer can view the invoices he received and approve or reject them.
+Invoice Portal is automated system for generating and processing invoices.A supplier can create a invoice and get the details of his invoices.A buyer can view the invoices he received and approve or reject them.Its my first project where I wanted to learn implementing front end and backend together,with simple CRUD operations.Invoices seemed like  a good topic to start as it requires less heavy UI element and data operations.I will also be implementing Login and Authorization using Auth0.
 
-# Getting Started with Create React App
+I have connected my GitHub to Cloudflare where Invoice Portal application is deployed using Cloudflare Pages.
+Site : https://invoice-portal.pages.dev/
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
+## Technologies
+Project is created with:
+* React version: 18.2.0
+* MUI for UI
+* JavaScript
+* HTML
+	
+## Setup
+To run this project, install it locally using npm:
 
 In the project directory, you can run:
 
@@ -36,44 +49,15 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Illustrations
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Project Status
+Project is still in devlopment phase.Currently I am working on creating form for invoice portal.
+Next step will be creating a view invoice page once the form is submitted.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Sources
+https://reactjs.org/
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+https://mui.com/material-ui/getting-started/overview/
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
