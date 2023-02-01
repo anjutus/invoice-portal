@@ -8,6 +8,7 @@ Invoice Portal is automated system for generating and processing invoices..
 * [Illustrations](#illustrations)
 * [Project Status](#project-status)
 * [Sources](#Sources)
+* [Blog](#Blog)
 
 
 ## General Information
@@ -51,6 +52,13 @@ Your app is ready to be deployed!
 
 ## Illustrations
 
+#### Figma prototype for the Invoice portal
+Supplier : https://www.figma.com/proto/q0eAY8aYfc7ewD5pJy5LCr/Invoice-Portal-Design-and-Prototype?node-id=1%3A2&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=1%3A2&show-proto-sidebar=1
+
+Buyer : https://www.figma.com/proto/q0eAY8aYfc7ewD5pJy5LCr/Invoice-Portal-Design-and-Prototype?node-id=14%3A364&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=14%3A364&show-proto-sidebar=1
+
+#### Architecture
+![Invoice Portal Architecture](./public/Invoice%20Portal%20Architecture.jpg)
 
 ## Project Status
 Project is still in devlopment phase.Currently I am working on creating form for invoice portal.
@@ -60,4 +68,7 @@ Next step will be creating a view invoice page once the form is submitted.
 https://reactjs.org/
 
 https://mui.com/material-ui/getting-started/overview/
+
+## Blog
+https://anjutuscano.blogspot.com/
 
