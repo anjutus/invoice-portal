@@ -10,12 +10,13 @@ export const formValidationSchema = Yup.object().shape({
     .required('Invoice ID number is required'),
     supplierName: Yup.string()
    .required('Supplier Name is required'),
-   issueDate: Yup.mixed()
-   .required('Issue Date is required'),
+    issueDate: Yup.date()
+    // .required('Issue Date is required')
+    .nullable(),
    dueDate: Yup.mixed()
-   .required('Due Date is required'),
+  //  .required('Due Date is required'),
 
-   invoiceProductDetails: Yup.array().of(
+   ,invoiceProductDetails: Yup.array().of(
     Yup.object().shape({
     productID :Yup.number()
     .required('Product ID is required')
@@ -44,10 +45,10 @@ export const formValidationSchema = Yup.object().shape({
     .transform((_, val) => (val !== "" ? Number(val) : null))
     .nullable(),
     totalAmount :Yup.number()
-    .required('Invoice Total cannot be less than zero')
-    .test(
-      'Is positive?', 
-      'ERROR: Invoice Total cannot be less than zero', 
-      (value) => value > 0
-    )
+    .positive("Invoice Total cannot be less than zero")
+    // .test(
+    //   'Is positive?', 
+    //   'ERROR: Invoice Total cannot be less than zero', 
+    //   (value) => value > 0
+    // )
   });

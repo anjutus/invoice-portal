@@ -10,6 +10,9 @@ import { formValidationSchema } from '../utils/formValidationSchema';
 import { FormCalculation } from '../utils/FormCalculation';
 import PercentIcon from '@mui/icons-material/Percent';
 import InputAdornment from '@mui/material/InputAdornment';
+import { useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes,Route, Navigate } from "react-router-dom";
+import ViewInvoiceDoc from './InvoicePDFDocument/ViewInvoiceDoc';
 
 export default function CreateInvoiceNew() {
     //set a blank Invoice Data in a Create Form state
@@ -24,7 +27,7 @@ export default function CreateInvoiceNew() {
     //Update the current state with input value from a header component
     const handleHeaderInputChange = (e, ...elementName) => {
         var date = new Date(e);
-        console.log(e);
+        //console.log(e);
         if (elementName[0] === "issueDate") {
             formData.invoiceData.issueDate = date.toLocaleDateString();
         }
@@ -56,7 +59,7 @@ export default function CreateInvoiceNew() {
             ...oldFormData,
             ...formData
         }))
-        console.log(JSON.stringify(formData))
+        //console.log(JSON.stringify(formData))
     }
 
     //Update the current state with input value from a Add product component
@@ -128,9 +131,12 @@ export default function CreateInvoiceNew() {
     }
 
     // On Submit Form
+    const navigate = useNavigate();
     const onSubmitBtn = (index, e) => {
-        e.preventDefault();
+
         console.log(JSON.stringify(formData))
+        console.log("Submitted!!!")
+        navigate("/invoicepdfdocument");
     }
 
     //Passing the validation rules in react hook form using yup Resolver function
@@ -512,6 +518,7 @@ export default function CreateInvoiceNew() {
                     </Paper>
                 </Container>
             </FormControl>
+            
         </div>
     )
 }
