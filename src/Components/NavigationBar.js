@@ -63,7 +63,7 @@ function NavigationBar() {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" sx={{marginBottom:"20px"}}>
             <Container maxWidth="xl" sx={{ backgroundColor: "#3DA000" }}>
                 <Toolbar>
                     <Link href="#" underline="none" sx={{ mr: 2, display: { xs: 'none', md: 'flex' },}}>
