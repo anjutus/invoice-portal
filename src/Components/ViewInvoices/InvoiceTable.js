@@ -13,9 +13,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { ViewInvoiceData } from "../../utils/ViewInvoiceData";
-import { useQuery } from 'react-query';
-import axios from "axios";
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -36,11 +34,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-//Add invoice data array in local variable
-const data=ViewInvoiceData;
 
-export default function InvoiceTable() {
+export default function InvoiceTable(props) {
 
+  const data = props.allInvoiceData;
 
 
   return (
@@ -58,17 +55,18 @@ export default function InvoiceTable() {
         </TableHead>
         <TableBody>
           {data.map((invoicedata) => (
-            <StyledTableRow key={invoicedata.invoiceId}>
+            <StyledTableRow key={invoicedata.invoiceData.invoiceId}>
               <StyledTableCell component="th" scope="row">
-                {invoicedata.invoiceId}
+                {invoicedata.invoiceData.invoiceID}
               </StyledTableCell>
-              <StyledTableCell align="right">{invoicedata.clientName}</StyledTableCell>
-              <StyledTableCell align="right">{invoicedata.issueDate}</StyledTableCell>
-              <StyledTableCell align="right">{invoicedata.dueDate}</StyledTableCell>
-              <StyledTableCell align="right">{invoicedata.amount}</StyledTableCell>
-              <StyledTableCell align="right">{invoicedata.status}</StyledTableCell>
+              <StyledTableCell align="right">{invoicedata.invoiceData.supplierName}</StyledTableCell>
+              <StyledTableCell align="right">{invoicedata.invoiceData.issueDate}</StyledTableCell>
+              <StyledTableCell align="right">{invoicedata.invoiceData.dueDate}</StyledTableCell>
+              <StyledTableCell align="right">{invoicedata.invoiceData.payment.totalAmount}</StyledTableCell>
+              <StyledTableCell align="right">{invoicedata.invoiceData.status}</StyledTableCell>
             </StyledTableRow>
-          ))}
+          ))} 
+
         </TableBody>
       </Table>
     </TableContainer>
