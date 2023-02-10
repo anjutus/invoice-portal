@@ -132,13 +132,7 @@ export default function CreateInvoiceNew() {
     // On Submit Form
     //Call an API to post the data into MongoDB
     const url = `https://esqsuiva17.execute-api.us-east-2.amazonaws.com/Devlopment/invoice`;
-    // const createInvoicePayload = {
-    //     dataSource: "Cluster0",
-    //     database: "InvoicePortal",
-    //     collection: "Invoices",
-    //     document: formData
-        
-    // };
+
     const header = {
         headers: {
             'Content-Type': 'application/json',
@@ -146,19 +140,23 @@ export default function CreateInvoiceNew() {
         }
     }
 
-
-
-
-
     const navigate = useNavigate();
     const onSubmitBtn = async (index, e) => {
 
         const response = await axios.post(url, formData, header);
-        console.log("object ID" + response);
-
+        console.log("insertedId" + JSON.stringify(response.data.insertedId));
+        console.log("ACK" + JSON.stringify(response.data.acknowledged));
+        console.log("status " + JSON.stringify(response.status));
         // console.log(JSON.stringify(formData))
         console.log("Submitted!!!")
-        navigate("/invoicepdfdocument");
+        if(response.data.acknowledged && (response.data.insertedId !== ""))
+        {
+            navigate("/invoicepdfdocument",{ state: response.data.insertedId });
+        }
+        else {
+            console.log("Didnt navigate")
+        }
+        
     }
 
     //Passing the validation rules in react hook form using yup Resolver function
