@@ -14,8 +14,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { ViewInvoiceData } from "../../utils/ViewInvoiceData";
-
-
+import { useQuery } from 'react-query';
+import axios from "axios";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -40,6 +40,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const data=ViewInvoiceData;
 
 export default function InvoiceTable() {
+
+
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 1000 }} aria-label="customized table">

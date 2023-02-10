@@ -6,29 +6,37 @@ export const formValidationSchema = Yup.object().shape({
     invoiceID: Yup.number()
     .transform((_, val) => (val !== "" ? Number(val) : null))
     .nullable()
-    //.integer(0,'Invoice ID should be in muneric form')
+    .typeError('Invoice ID should be Numeric')
     .required('Invoice ID number is required'),
     supplierName: Yup.string()
    .required('Supplier Name is required'),
-   issueDate: Yup.mixed()
-   .required('Issue Date is required'),
+    issueDate: Yup.date()
+    // .required('Issue Date is required')
+    .nullable(),
    dueDate: Yup.mixed()
-   .required('Due Date is required'),
+  //  .required('Due Date is required'),
 
-   invoiceProductDetails: Yup.array().of(
+   ,invoiceProductDetails: Yup.array().of(
     Yup.object().shape({
     productID :Yup.number()
     .required('Product ID is required')
+    .typeError('Invoice ID should be Numeric')
     .transform((_, val) => (val !== "" ? Number(val) : null))
     .nullable(),
     productName :Yup.string()
     .required('Product Name is required'),
     productQuantity :Yup.number()
     .required('Product quantity is required')
+    .typeError('Invoice ID should be Numeric')
     .transform((_, val) => (val !== "" ? Number(val) : null))
     .nullable(),
     productPrice :Yup.number()
     .required('Product price is required')
+    .typeError('Please enter correct price')
+    .transform((_, val) => (val !== "" ? Number(val) : null))
+    .nullable(),
+    lineTotal :Yup.number()
+    .typeError('Please enter correct price')
     .transform((_, val) => (val !== "" ? Number(val) : null))
     .nullable(),
     })),
@@ -37,10 +45,10 @@ export const formValidationSchema = Yup.object().shape({
     .transform((_, val) => (val !== "" ? Number(val) : null))
     .nullable(),
     totalAmount :Yup.number()
-    .required('Invoice Total cannot be less than zero')
-    .test(
-      'Is positive?', 
-      'ERROR: Invoice Total cannot be less than zero', 
-      (value) => value > 0
-    )
+    .positive("Invoice Total cannot be less than zero")
+    // .test(
+    //   'Is positive?', 
+    //   'ERROR: Invoice Total cannot be less than zero', 
+    //   (value) => value > 0
+    // )
   });

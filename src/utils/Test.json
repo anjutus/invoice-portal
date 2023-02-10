@@ -1,30 +1,37 @@
 {
     "invoiceData": {
-        "invoiceID": "23232",
-        "supplierName": "cvbcbcvb",
-        "issueDate": "5/2/2022",
-        "dueDate": "8/11/2021",
-        "comments": "",
+        "invoiceID": "09808",
+        "supplierName": "suis",
+        "issueDate": "1/27/2023",
+        "dueDate": "1/1/2023",
         "status": "",
         "payment": {
-            "taxes": 0,
-            "discount": 0,
-            "totalAmount": 0
+            "tax": "12",
+            "discount": "33",
+            "comment": "",
+            "totalAmount": 5840.12
         },
         "invoiceProductDetails": [
             {
-                "productID": "2",
-                "productName": "vfgdfg",
-                "productQuantity": 0,
-                "productPrice": 0,
-                "lineTotal": 0
+                "productID": "1",
+                "productName": "dad",
+                "productQuantity": "2222",
+                "productPrice": "3",
+                "lineTotal": 6666
             },
             {
-                "productID": "3",
-                "productName": "fdbdfberf",
-                "productQuantity": 0,
-                "productPrice": 0,
-                "lineTotal": 0
+                "productID": "2",
+                "productName": "22",
+                "productQuantity": "2",
+                "productPrice": "2",
+                "lineTotal": 4
+            },
+            {
+                "productID": "2",
+                "productName": "32",
+                "productQuantity": "2",
+                "productPrice": "2",
+                "lineTotal": 4
             }
         ]
     }

@@ -1,8 +1,31 @@
-# Getting Started with Create React App
+# Invoice Portal App
+Invoice Portal is automated system for generating and processing invoices..
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of contents
+* [General Information](#general-information)
+* [Technologies](#technologies)
+* [Setup](#setup)
+* [Illustrations](#illustrations)
+* [Project Status](#project-status)
+* [Sources](#Sources)
+* [Blog](#Blog)
 
-## Available Scripts
+
+## General Information
+Invoice Portal is automated system for generating and processing invoices.A supplier can create a invoice and get the details of his invoices.A buyer can view the invoices he received and approve or reject them.Its my first project where I wanted to learn implementing front end and backend together,with simple CRUD operations.Invoices seemed like  a good topic to start as it requires less heavy UI element and data operations.I will also be implementing Login and Authorization using Auth0.
+
+I have connected my GitHub to Cloudflare where Invoice Portal application is deployed using Cloudflare Pages.
+Site : https://invoice-portal.pages.dev/
+
+## Technologies
+Project is created with:
+* React version: 18.2.0
+* MUI for UI
+* JavaScript
+* HTML
+	
+## Setup
+To run this project, install it locally using npm:
 
 In the project directory, you can run:
 
@@ -27,44 +50,25 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Illustrations
 
-### `npm run eject`
+#### Figma prototype for the Invoice portal
+Supplier : https://www.figma.com/proto/q0eAY8aYfc7ewD5pJy5LCr/Invoice-Portal-Design-and-Prototype?node-id=1%3A2&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=1%3A2&show-proto-sidebar=1
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Buyer : https://www.figma.com/proto/q0eAY8aYfc7ewD5pJy5LCr/Invoice-Portal-Design-and-Prototype?node-id=14%3A364&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=14%3A364&show-proto-sidebar=1
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Architecture
+![Invoice Portal Architecture](./public/Invoice%20Portal%20Architecture.jpg)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Project Status
+Project is still in devlopment phase.Currently I am working on creating form for invoice portal.
+Next step will be creating a view invoice page once the form is submitted.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Sources
+https://reactjs.org/
 
-## Learn More
+https://mui.com/material-ui/getting-started/overview/
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Blog
+https://anjutuscano.blogspot.com/
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

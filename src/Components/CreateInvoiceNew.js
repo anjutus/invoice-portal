@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Paper, Box, Grid, TextField, Typography, Button, Container, FormControl, FormGroup, FormLabel, Table, TableRow, TableCell, TableBody, TableHead } from '@mui/material';
+import { Paper, Box, Grid, TextField, Typography, Button, Container, FormControl, FormLabel } from '@mui/material';
 import { invoiceData } from '../utils/invoiceData';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -10,7 +10,10 @@ import { formValidationSchema } from '../utils/formValidationSchema';
 import { FormCalculation } from '../utils/FormCalculation';
 import PercentIcon from '@mui/icons-material/Percent';
 import InputAdornment from '@mui/material/InputAdornment';
-import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import ViewInvoiceDoc from './InvoicePDFDocument/ViewInvoiceDoc';
+import axios from "axios";
 
 export default function CreateInvoiceNew() {
     //set a blank Invoice Data in a Create Form state
@@ -19,12 +22,11 @@ export default function CreateInvoiceNew() {
     }
     );
 
-    
-
 
     //Update the current state with input value from a header component
     const handleHeaderInputChange = (e, ...elementName) => {
         var date = new Date(e);
+        //console.log(e);
         if (elementName[0] === "issueDate") {
             formData.invoiceData.issueDate = date.toLocaleDateString();
         }
@@ -56,10 +58,13 @@ export default function CreateInvoiceNew() {
             ...oldFormData,
             ...formData
         }))
-        console.log(JSON.stringify(formData))
+        //console.log(JSON.stringify(formData))
     }
 
     //Update the current state with input value from a Add product component
+
+    var currencyFormatter = require('currency-formatter');
+
     const handleProductInputChange = (e, index) => {
         const { name, value } = e.target
 
@@ -73,11 +78,11 @@ export default function CreateInvoiceNew() {
             formData.invoiceData.invoiceProductDetails[index].productQuantity = value;
             FormCalculation(formData)
         }
-        else if (name === ('invoiceProductDetails.' + index + '.productPrice')) {
+        else if (name === ('invoiceProductDetails.' + index + '.productPrice') && !Number.isNaN(value)) {
             formData.invoiceData.invoiceProductDetails[index].productPrice = value;
             FormCalculation(formData)
         }
-        else if (name === "lineTotal")
+        else if (name === "lineTotal" && !Number.isNaN(value))
             formData.invoiceData.invoiceProductDetails[index].lineTotal = value;
         //console.log( JSON.stringify(formData))
         setFormData(oldFormData => ({
@@ -125,9 +130,33 @@ export default function CreateInvoiceNew() {
     }
 
     // On Submit Form
-    const onSubmitBtn = (index, e) => {
-        e.preventDefault();
-        console.log(JSON.stringify(formData))
+    //Call an API to post the data into MongoDB
+    const url = `https://esqsuiva17.execute-api.us-east-2.amazonaws.com/Devlopment/invoice`;
+
+    const header = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+        }
+    }
+
+    const navigate = useNavigate();
+    const onSubmitBtn = async (index, e) => {
+
+        const response = await axios.post(url, formData, header);
+        console.log("insertedId" + JSON.stringify(response.data.insertedId));
+        console.log("ACK" + JSON.stringify(response.data.acknowledged));
+        console.log("status " + JSON.stringify(response.status));
+        // console.log(JSON.stringify(formData))
+        console.log("Submitted!!!")
+        if(response.data.acknowledged && (response.data.insertedId !== ""))
+        {
+            navigate("/invoicepdfdocument",{ state: response.data.insertedId });
+        }
+        else {
+            console.log("Didnt navigate")
+        }
+        
     }
 
     //Passing the validation rules in react hook form using yup Resolver function
@@ -138,6 +167,7 @@ export default function CreateInvoiceNew() {
         handleSubmit,
         formState: { errors }
     } = useForm({
+        mode: 'onTouched',
         resolver: yupResolver(formValidationSchema)
     });
 
@@ -176,7 +206,7 @@ export default function CreateInvoiceNew() {
                                             error={errors.invoiceID ? true : false}
                                             onChange={(e) => handleHeaderInputChange(e)}
                                         />
-                                        <Typography color="textSecondary" sx={{ fontSize: '10px' }}>
+                                        <Typography color="error" sx={{ fontSize: '10px' }}>
                                             {errors.invoiceID?.message}
                                         </Typography>
                                     </Grid>
@@ -196,13 +226,13 @@ export default function CreateInvoiceNew() {
                                             error={errors.supplierName ? true : false}
                                             onChange={(e) => handleHeaderInputChange(e)}
                                         />
-                                        <Typography color="textSecondary" sx={{ fontSize: '10px' }}>
+                                        <Typography color="error" sx={{ fontSize: '10px' }}>
                                             {errors.supplierName?.message}
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12} sm={3} sx={{ textAlign: 'left' }}>
                                         <FormLabel>Issue Date</FormLabel>
-                                        <LocalizationProvider id dateAdapter={AdapterDayjs}>
+                                        <LocalizationProvider dateAdapter={AdapterDayjs}>
                                             <Controller name="issueDate"
                                                 control={control}
                                                 defaultValue={null}
@@ -216,13 +246,12 @@ export default function CreateInvoiceNew() {
                                                         value={formData.invoiceData.issueDate}
                                                         onChange={(e) => handleHeaderInputChange(e, "issueDate")}
                                                         renderInput={(params) => <TextField {...params}
-                                                            {...register('issueDate')}
                                                             error={invalid}
                                                             sx={{ bgcolor: 'white', marginTop: '7px', marginBottom: '7px' }} size="small" />}
                                                     />
                                                 )} />
                                         </LocalizationProvider>
-                                        <Typography sx={{ fontSize: '10px' }} color="textSecondary">
+                                        <Typography sx={{ fontSize: '10px' }} color="error">
                                             {errors.issueDate?.message}
                                         </Typography>
                                     </Grid>
@@ -241,13 +270,12 @@ export default function CreateInvoiceNew() {
                                                         value={formData.invoiceData.dueDate}
                                                         onChange={(e) => handleHeaderInputChange(e, "dueDate")}
                                                         renderInput={(params) => <TextField {...params}
-                                                            {...register('dueDate')}
                                                             error={invalid}
                                                             sx={{ bgcolor: 'white', marginTop: '7px', marginBottom: '7px' }} size="small" />}
                                                     />
                                                 )} />
                                         </LocalizationProvider>
-                                        <Typography sx={{ fontSize: '10px' }} color="textSecondary">
+                                        <Typography sx={{ fontSize: '10px' }} color="error">
                                             {errors.dueDate?.message}
                                         </Typography>
                                     </Grid>
@@ -297,7 +325,7 @@ export default function CreateInvoiceNew() {
                                                             {...register(`invoiceProductDetails.${index}.productID`)}
                                                             error={errors.invoiceProductDetails?.[index]?.productID ? true : false}
                                                             onChange={(e) => handleProductInputChange(e, index)} />
-                                                        <Typography sx={{ fontSize: '10px' }} color="textSecondary">
+                                                        <Typography sx={{ fontSize: '10px' }} color="error">
                                                             {errors.invoiceProductDetails?.[index]?.productID?.message}
                                                         </Typography>
                                                     </Grid>
@@ -315,7 +343,7 @@ export default function CreateInvoiceNew() {
                                                             {...register(`invoiceProductDetails.${index}.productName`)}
                                                             error={errors.invoiceProductDetails?.[index]?.productName ? true : false}
                                                             onChange={(e) => handleProductInputChange(e, index)} />
-                                                        <Typography sx={{ fontSize: '10px' }} color="textSecondary">
+                                                        <Typography sx={{ fontSize: '10px' }} color="error">
                                                             {errors.invoiceProductDetails?.[index]?.productName?.message}
                                                         </Typography>
                                                     </Grid>
@@ -335,7 +363,7 @@ export default function CreateInvoiceNew() {
                                                             error={errors.invoiceProductDetails?.[index]?.productQuantity ? true : false}
                                                             onChange={(e) => handleProductInputChange(e, index)}
                                                         />
-                                                        <Typography sx={{ fontSize: '10px' }} color="textSecondary">
+                                                        <Typography sx={{ fontSize: '10px' }} color="error">
                                                             {errors.invoiceProductDetails?.[index]?.productQuantity?.message}
                                                         </Typography>
                                                     </Grid>
@@ -354,7 +382,7 @@ export default function CreateInvoiceNew() {
                                                             error={errors.invoiceProductDetails?.[index]?.productPrice ? true : false}
                                                             onChange={(e) => handleProductInputChange(e, index)}
                                                         />
-                                                        <Typography sx={{ fontSize: '10px' }} color="textSecondary">
+                                                        <Typography sx={{ fontSize: '10px' }} color="error">
                                                             {errors.invoiceProductDetails?.[index]?.productPrice?.message}
                                                         </Typography>
                                                     </Grid>
@@ -369,10 +397,16 @@ export default function CreateInvoiceNew() {
                                                             fullWidth
                                                             margin="dense"
                                                             size="small"
-                                                            value={formData.invoiceData.invoiceProductDetails[index].lineTotal}
+                                                            // value={currencyFormatter.format(formData.invoiceData.invoiceProductDetails[index].lineTotal, { code: 'USD' })}
+                                                            value={new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(formData.invoiceData.invoiceProductDetails[index].lineTotal)}
+                                                            {...register(`invoiceProductDetails.${index}.lineTotal`)}
+                                                            error={errors.invoiceProductDetails?.[index]?.lineTotal ? true : false}
                                                             onChange={(e) => handleProductInputChange(e, index)}
                                                             disabled={true}
                                                         />
+                                                        <Typography sx={{ fontSize: '10px' }} color="error">
+                                                            {errors.invoiceProductDetails?.[index]?.lineTotal?.message}
+                                                        </Typography>
                                                     </Grid>
                                                     <Grid item xs={0.5} sm={0.5}>
                                                         <Button
@@ -431,7 +465,7 @@ export default function CreateInvoiceNew() {
                                                 ),
                                             }}
                                         />
-                                        <Typography sx={{ fontSize: '10px' }} color="textSecondary">
+                                        <Typography sx={{ fontSize: '10px' }} color="error">
                                             {errors.tax?.message}
                                         </Typography>
                                     </Grid>
@@ -462,14 +496,15 @@ export default function CreateInvoiceNew() {
                                             fullWidth
                                             margin="dense"
                                             size="small"
-                                            value={formData.invoiceData.payment.totalAmount}
+                                            // value={currencyFormatter.format(formData.invoiceData.payment.totalAmount, { code: 'USD' })}
+                                            value={new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(formData.invoiceData.payment.totalAmount)}
                                             {...register('totalAmount')}
                                             error={errors.totalAmount ? true : false}
                                             disabled={true}
                                         >
-                                            
+
                                         </TextField>
-                                        <Typography color="textSecondary" sx={{ fontSize: '10px' }}>
+                                        <Typography color="error" sx={{ fontSize: '10px' }}>
                                             {errors.totalAmount?.message}
                                         </Typography>
                                     </Grid>
@@ -503,6 +538,7 @@ export default function CreateInvoiceNew() {
                     </Paper>
                 </Container>
             </FormControl>
+
         </div>
     )
 }
