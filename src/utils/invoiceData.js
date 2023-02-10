@@ -5,7 +5,7 @@ export const invoiceData =
         supplierName: "",
         issueDate: "",
         dueDate: "",
-        status:"",
+        status:"PENDING",
         payment: {
             tax: 0,
             discount: 0,

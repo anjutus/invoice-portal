@@ -13,7 +13,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { useEffect, useState } from "react";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -40,23 +39,18 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function TableComponent(props) {
 
 
-  const [invoicedata, setInvoiceData] = useState([]);
-
-  useEffect(() => {
-    
-    setInvoiceData(props.invoiceData);
-        //console.log("this is"+res.data.invoiceData.invoiceID);
-       // console.log("this is Hello");
-    },[]);
+  console.log("props details"+JSON.stringify(props.invoiceData.payment.tax));
 
 
 const invoiceHeader=props.invoiceHeader;
 //console.log("invoiceheader"+invoiceHeader);
-const data=invoicedata.invoiceProductDetails;
-console.log("product details"+data);
+const data=props.invoiceData.invoiceProductDetails;
+console.log("payment details"+JSON.stringify(props.invoiceData));
 
 //console.log("invoice details"+invoicedata);
   return (
+    <div>
+        
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 1000 }} aria-label="customized table">
         <TableHead>
@@ -79,20 +73,24 @@ console.log("product details"+data);
               <StyledTableCell >{item.lineTotal}</StyledTableCell>
             </StyledTableRow>
           ))}
+        <TableRow sx={{ backgroundColor: "#DFECC3" ,borderTop:1}}>
+                <TableCell colSpan={4}>Tax</TableCell>
+                <TableCell>{props.invoiceData.payment.tax}</TableCell> 
+              </TableRow>
+              <TableRow sx={{ backgroundColor: "#DFECC3" }}>
+                
+                <TableCell colSpan={4}>Discount</TableCell>
+                <TableCell >{props.invoiceData.payment.discount}</TableCell>
+              </TableRow>
+              <TableRow sx={{ backgroundColor: "#DFECC3", borderTop:3 ,borderColor:"black",borderTopColor:"black"}}>
+                
+                <TableCell sx={{ fontWeight: 'bold' }} colSpan={4}>Total Amount</TableCell>
+                <TableCell>{props.invoiceData.payment.totalAmount}</TableCell>
+              </TableRow>
         </TableBody>
-        {/* <TableBody>
-          {data.map((item,index) => (  
-            <StyledTableRow  key={item.productID}>
-              <StyledTableCell align="right">{item.productName}</StyledTableCell>
-              
-              <StyledTableCell align="right">{invoicedata.invoiceProductDetails.productName}</StyledTableCell>
-              <StyledTableCell align="right">{invoicedata.invoiceProductDetails.productQuantity}</StyledTableCell>
-              <StyledTableCell align="right">{invoicedata.invoiceProductDetails.productPrice}</StyledTableCell>
-              <StyledTableCell align="right">{invoicedata.invoiceProductDetails.lineTotal}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody> */}
+        
       </Table>
     </TableContainer>
+    </div>
   );
 }

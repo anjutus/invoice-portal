@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Paper, Box, Grid, TextField, Typography, Button, Container, FormControl,FormLabel} from '@mui/material';
+import { Paper, Box, Grid, TextField, Typography, Button, Container, FormControl, FormLabel } from '@mui/material';
 import { invoiceData } from '../utils/invoiceData';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -11,8 +11,9 @@ import { FormCalculation } from '../utils/FormCalculation';
 import PercentIcon from '@mui/icons-material/Percent';
 import InputAdornment from '@mui/material/InputAdornment';
 import { useNavigate } from 'react-router-dom';
-import { BrowserRouter as Router, Routes,Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import ViewInvoiceDoc from './InvoicePDFDocument/ViewInvoiceDoc';
+import axios from "axios";
 
 export default function CreateInvoiceNew() {
     //set a blank Invoice Data in a Create Form state
@@ -20,8 +21,6 @@ export default function CreateInvoiceNew() {
         invoiceData
     }
     );
-
-    
 
 
     //Update the current state with input value from a header component
@@ -131,10 +130,33 @@ export default function CreateInvoiceNew() {
     }
 
     // On Submit Form
-    const navigate = useNavigate();
-    const onSubmitBtn = (index, e) => {
+    //Call an API to post the data into MongoDB
+    const url = `https://esqsuiva17.execute-api.us-east-2.amazonaws.com/Devlopment/invoice`;
+    // const createInvoicePayload = {
+    //     dataSource: "Cluster0",
+    //     database: "InvoicePortal",
+    //     collection: "Invoices",
+    //     document: formData
+        
+    // };
+    const header = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+        }
+    }
 
-        console.log(JSON.stringify(formData))
+
+
+
+
+    const navigate = useNavigate();
+    const onSubmitBtn = async (index, e) => {
+
+        const response = await axios.post(url, formData, header);
+        console.log("object ID" + response);
+
+        // console.log(JSON.stringify(formData))
         console.log("Submitted!!!")
         navigate("/invoicepdfdocument");
     }
@@ -147,7 +169,7 @@ export default function CreateInvoiceNew() {
         handleSubmit,
         formState: { errors }
     } = useForm({
-        mode :'onTouched',
+        mode: 'onTouched',
         resolver: yupResolver(formValidationSchema)
     });
 
@@ -384,7 +406,7 @@ export default function CreateInvoiceNew() {
                                                             onChange={(e) => handleProductInputChange(e, index)}
                                                             disabled={true}
                                                         />
-                                                         <Typography sx={{ fontSize: '10px' }} color="error">
+                                                        <Typography sx={{ fontSize: '10px' }} color="error">
                                                             {errors.invoiceProductDetails?.[index]?.lineTotal?.message}
                                                         </Typography>
                                                     </Grid>
@@ -482,7 +504,7 @@ export default function CreateInvoiceNew() {
                                             error={errors.totalAmount ? true : false}
                                             disabled={true}
                                         >
-                                            
+
                                         </TextField>
                                         <Typography color="error" sx={{ fontSize: '10px' }}>
                                             {errors.totalAmount?.message}
@@ -518,7 +540,7 @@ export default function CreateInvoiceNew() {
                     </Paper>
                 </Container>
             </FormControl>
-            
+
         </div>
     )
 }
