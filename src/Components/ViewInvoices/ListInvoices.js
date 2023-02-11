@@ -15,7 +15,7 @@ import { useQuery } from 'react-query';
 import axios from "axios";
 
 import InvoiceTable from './InvoiceTable';
-
+import { InvoicesStats } from '../InvoicesStats';
 //export const numofInvoiceData = ViewInvoiceData.map((invoice) => invoice.invoiceId)
 
 export default function ListInvoices() {
@@ -58,35 +58,37 @@ export default function ListInvoices() {
     // Error and Loading states
     if (error) return <div>Request Failed</div>;
     if (isLoading) return <div>Loading...</div>;
+    
+    const invoiceStatus = InvoicesStats(data);
     //calculate 
 
-    const calculatePending = () => {
-        var count = 0;
-        data.map((item) => {
-            if ((item.invoiceData.status === "PENDING")) {
-                count = count + 1;
-            }
-        })
-        return count;
-    }
-    const calculateApproved = () => {
-        var count = 0;
-        data.map((item) => {
-            if ((item.invoiceData.status === "APPROVED")) {
-                count = count + 1;
-            }
-        })
-        return count;
-    }
-    const calculateRejected = () => {
-        var count = 0;
-        data.map((item) => {
-            if ((item.invoiceData.status === "REJECTED")) {
-                count = count + 1;
-            }
-        })
-        return count;
-    }
+    // const calculatePending = () => {
+    //     var count = 0;
+    //     data.map((item) => {
+    //         if ((item.invoiceData.status === "PENDING")) {
+    //             count = count + 1;
+    //         }
+    //     })
+    //     return count;
+    // }
+    // const calculateApproved = () => {
+    //     var count = 0;
+    //     data.map((item) => {
+    //         if ((item.invoiceData.status === "APPROVED")) {
+    //             count = count + 1;
+    //         }
+    //     })
+    //     return count;
+    // }
+    // const calculateRejected = () => {
+    //     var count = 0;
+    //     data.map((item) => {
+    //         if ((item.invoiceData.status === "REJECTED")) {
+    //             count = count + 1;
+    //         }
+    //     })
+    //     return count;
+    // }
 
     return (
         <Container maxWidth="xl">
@@ -95,7 +97,7 @@ export default function ListInvoices() {
                     <Box sx={{ ...boxStyle }}>
                         <Item>
                             <h3>Pending</h3>
-                            <h4>{calculatePending()}</h4>
+                            <h4>{invoiceStatus.pendingCount}</h4>
                         </Item>
                     </Box>
                 </Grid>
@@ -103,7 +105,7 @@ export default function ListInvoices() {
                     <Box sx={{ ...boxStyle }}>
                         <Item>
                             <h3>Rejected</h3>
-                            <h4>{calculateRejected()}</h4>
+                            <h4>{invoiceStatus.rejectedCount}</h4>
                         </Item>
                     </Box>
                 </Grid>
@@ -111,7 +113,7 @@ export default function ListInvoices() {
                     <Box sx={{ ...boxStyle }}>
                         <Item>
                             <h3>Approved</h3>
-                            <h4>{calculateApproved()}</h4>
+                            <h4>{invoiceStatus.approvedCount}</h4>
                         </Item>
                     </Box>
                 </Grid>

@@ -12,7 +12,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Grid from '@mui/material/Grid';
-import TableComponent from '../TableComponent';
+import TableComponent from './TableComponent';
 import { useQuery } from 'react-query';
 import Typography from '@mui/material/Typography';
 import AttachMoneyIcon   from '@mui/icons-material/AttachMoney';
