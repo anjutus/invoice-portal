@@ -12,8 +12,9 @@ import PercentIcon from '@mui/icons-material/Percent';
 import InputAdornment from '@mui/material/InputAdornment';
 import { useNavigate } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import ViewInvoiceDoc from './InvoicePDFDocument/ViewInvoiceDoc';
+import ViewInvoiceDoc from './ViewSingleInvoice';
 import axios from "axios";
+import cloneDeep from 'lodash.clonedeep';
 
 export default function CreateInvoiceNew() {
     //set a blank Invoice Data in a Create Form state
@@ -120,7 +121,8 @@ export default function CreateInvoiceNew() {
         formData.invoiceData.invoiceProductDetails = formData.invoiceData.invoiceProductDetails.filter((item, i) => {
             return i !== index;
         })
-
+        // const newFormData = cloneDeep(formData)
+        // setFormData(newFormData)
         setFormData(oldFormData => ({
             ...oldFormData,
             ...formData
@@ -142,6 +144,7 @@ export default function CreateInvoiceNew() {
 
     const navigate = useNavigate();
     const onSubmitBtn = async (index, e) => {
+        // console.log("Previous insertedId" + JSON.stringify(response));
 
         const response = await axios.post(url, formData, header);
         console.log("insertedId" + JSON.stringify(response.data.insertedId));
@@ -151,7 +154,7 @@ export default function CreateInvoiceNew() {
         console.log("Submitted!!!")
         if(response.data.acknowledged && (response.data.insertedId !== ""))
         {
-            navigate("/invoicepdfdocument",{ state: response.data.insertedId });
+            navigate("/viewSingleInvoice",{ state: response.data.insertedId });
         }
         else {
             console.log("Didnt navigate")

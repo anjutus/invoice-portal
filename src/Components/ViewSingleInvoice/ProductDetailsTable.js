@@ -39,7 +39,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 //Add invoice data array in local variable
 
-export default function TableComponent(props) {
+export default function ProductDetailsTable(props) {
 
 
   //console.log("props details" + JSON.stringify(props.invoiceData.payment.tax));
