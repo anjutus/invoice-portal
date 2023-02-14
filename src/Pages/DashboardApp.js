@@ -8,10 +8,10 @@ import { Grid, Container} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import PieChart from "./PieChart";
-import { InvoiceData } from "../../utils/PieData";
-import { properties } from '../../utils/properties.js';
-import { InvoicesStats } from '../InvoicesStats';
+import PieChart from "../Components/Dashboard/PieChart";
+import { InvoiceData } from "../utils/PieData";
+import { properties } from '../utils/properties.js';
+import { InvoicesStats } from '../Components/ViewAllInvoices/InvoicesStats';
 import { useQuery } from 'react-query';
 import axios from "axios";
 

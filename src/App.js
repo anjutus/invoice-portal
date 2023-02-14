@@ -1,10 +1,10 @@
 import './App.css';
 import NavigationBar from './Components/NavigationBar';
-import DashboardApp from './Components/Dashboard/DashboardApp';
-import ViewInvoiceDoc from './Components/InvoicePDFDocument/ViewInvoiceDoc';
+import DashboardApp from './Pages/DashboardApp';
+import ViewSingleInvoice from './Pages/ViewSingleInvoice';
 import { BrowserRouter as Router, Routes,Route } from "react-router-dom";
-import ListInvoices from './Components/ViewInvoices/ListInvoices';
-import CreateInvoice from './Components/CreateInvoiceNew';
+import ListAllInvoices from './Pages/ListAllInvoices';
+import CreateInvoice from './Pages/CreateInvoiceNew';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
 // Initialze the client
@@ -12,10 +12,11 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
-      refetchOnmount: false,
+      refetchOnMount: true,
       refetchOnReconnect: false,
       retry: false,
       staleTime: 60*60*1000,
+      
     },
   },
 });
@@ -28,9 +29,9 @@ function App() {
               <NavigationBar/>
               <Routes>
                 <Route exact path="/" element={<DashboardApp />} />
-                <Route path="viewInvoices" element={<ListInvoices />} />
+                <Route path="viewInvoices" element={<ListAllInvoices />} />
                 <Route path="createInvoice" element={<CreateInvoice />} />
-                <Route path="invoicepdfdocument" element={<ViewInvoiceDoc />} />
+                <Route path="viewSingleInvoice" element={<ViewSingleInvoice />} />
               </Routes>
           </Router>
         </QueryClientProvider>
