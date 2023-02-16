@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import ViewInvoiceDoc from './ViewSingleInvoice';
 import axios from "axios";
-import cloneDeep from 'lodash.clonedeep';
+
 
 export default function CreateInvoiceNew() {
     //set a blank Invoice Data in a Create Form state
@@ -311,10 +311,10 @@ export default function CreateInvoiceNew() {
                                     <Grid container sx={{ overflowY: "auto", maxHeight: "250px", }}>
                                         {invoiceData.invoiceProductDetails.map((item, index) => (
 
-                                            <>
+                                            <React.Fragment key={index}>
                                                 {/* {console.log(index)} */}
                                                 <Grid container spacing={1} key={index}>
-                                                    <Grid item xs={1.5} sm={1.5}>
+                                                    <Grid item xs={1.5} sm={1.5} key={"productID"+index}>
                                                         <TextField
                                                             sx={{
                                                                 bgcolor: 'white',
@@ -332,7 +332,7 @@ export default function CreateInvoiceNew() {
                                                             {errors.invoiceProductDetails?.[index]?.productID?.message}
                                                         </Typography>
                                                     </Grid>
-                                                    <Grid item xs={5} sm={5}>
+                                                    <Grid item xs={5} sm={5}  key={"productName"+index}>
                                                         <TextField
                                                             sx={{
                                                                 bgcolor: 'white',
@@ -350,7 +350,7 @@ export default function CreateInvoiceNew() {
                                                             {errors.invoiceProductDetails?.[index]?.productName?.message}
                                                         </Typography>
                                                     </Grid>
-                                                    <Grid item xs={1} sm={1}>
+                                                    <Grid item xs={1} sm={1}  key={"productQuantity"+index}>
 
                                                         <TextField
                                                             sx={{
@@ -370,7 +370,7 @@ export default function CreateInvoiceNew() {
                                                             {errors.invoiceProductDetails?.[index]?.productQuantity?.message}
                                                         </Typography>
                                                     </Grid>
-                                                    <Grid item xs={1.5} sm={1.5}>
+                                                    <Grid item xs={1.5} sm={1.5}  key={"productPrice"+index}>
                                                         <TextField
                                                             sx={{
                                                                 bgcolor: 'white',
@@ -389,7 +389,7 @@ export default function CreateInvoiceNew() {
                                                             {errors.invoiceProductDetails?.[index]?.productPrice?.message}
                                                         </Typography>
                                                     </Grid>
-                                                    <Grid item xs={1.5} sm={1.5}>
+                                                    <Grid item xs={1.5} sm={1.5} key={"lineTotal"+index}>
                                                         <TextField
                                                             sx={{
                                                                 bgcolor: 'white',
@@ -400,6 +400,7 @@ export default function CreateInvoiceNew() {
                                                             fullWidth
                                                             margin="dense"
                                                             size="small"
+                                                            key={"lineTotal"+index}
                                                             // value={currencyFormatter.format(formData.invoiceData.invoiceProductDetails[index].lineTotal, { code: 'USD' })}
                                                             value={new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(formData.invoiceData.invoiceProductDetails[index].lineTotal)}
                                                             {...register(`invoiceProductDetails.${index}.lineTotal`)}
@@ -411,17 +412,16 @@ export default function CreateInvoiceNew() {
                                                             {errors.invoiceProductDetails?.[index]?.lineTotal?.message}
                                                         </Typography>
                                                     </Grid>
-                                                    <Grid item xs={0.5} sm={0.5}>
+                                                    <Grid item xs={0.5} sm={0.5} key={"button"+index}>
                                                         <Button
                                                             variant="text"
                                                             color="primary"
-                                                            key={index}
                                                             onClick={(e) => onDeleteBtnDelete(e, index)}
                                                         >
                                                             Remove
                                                         </Button>
 
-                                                    </Grid></Grid> </>
+                                                    </Grid></Grid> </React.Fragment>
                                         ))}
                                     </Grid>
                                 </Grid>
