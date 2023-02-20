@@ -22,6 +22,7 @@ export function InvoicesStats(data) {
         }
     })
     console.log( "approvedCount"+approvedCount);
+    console.log( "approvedAmount"+approvedAmount);
     const invoicesStats = {
         "approvedCount": approvedCount,
         "pendingCount": pendingCount,

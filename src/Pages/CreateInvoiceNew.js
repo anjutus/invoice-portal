@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useCallback } from 'react'
 import { Paper, Box, Grid, TextField, Typography, Button, Container, FormControl, FormLabel } from '@mui/material';
 import { invoiceData } from '../utils/invoiceData';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -11,8 +11,6 @@ import { FormCalculation } from '../utils/FormCalculation';
 import PercentIcon from '@mui/icons-material/Percent';
 import InputAdornment from '@mui/material/InputAdornment';
 import { useNavigate } from 'react-router-dom';
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import ViewInvoiceDoc from './ViewSingleInvoice';
 import axios from "axios";
 
 
@@ -22,7 +20,6 @@ export default function CreateInvoiceNew() {
         invoiceData
     }
     );
-
 
     //Update the current state with input value from a header component
     const handleHeaderInputChange = (e, ...elementName) => {
@@ -64,72 +61,61 @@ export default function CreateInvoiceNew() {
 
     //Update the current state with input value from a Add product component
 
-    var currencyFormatter = require('currency-formatter');
-
     const handleProductInputChange = (e, index) => {
         const { name, value } = e.target
 
-        if (name === ('invoiceProductDetails.' + index + '.productID')) {
-            formData.invoiceData.invoiceProductDetails[index].productID = value;
-        }
-        else if (name === ('invoiceProductDetails.' + index + '.productName')) {
-            formData.invoiceData.invoiceProductDetails[index].productName = value;
-        }
-        else if (name === ('invoiceProductDetails.' + index + '.productQuantity')) {
-            formData.invoiceData.invoiceProductDetails[index].productQuantity = value;
-            FormCalculation(formData)
-        }
-        else if (name === ('invoiceProductDetails.' + index + '.productPrice') && !Number.isNaN(value)) {
-            formData.invoiceData.invoiceProductDetails[index].productPrice = value;
-            FormCalculation(formData)
-        }
-        else if (name === "lineTotal" && !Number.isNaN(value))
-            formData.invoiceData.invoiceProductDetails[index].lineTotal = value;
-        //console.log( JSON.stringify(formData))
-        setFormData(oldFormData => ({
-            ...oldFormData,
-            ...formData
-        }))
+        setFormData((prevFormData)=>{
+            const newFormData={...prevFormData}
+            if (name === ('invoiceProductDetails.' + index + '.productID')) {
+                formData.invoiceData.invoiceProductDetails[index].productID = value;
+            }
+            else if (name === ('invoiceProductDetails.' + index + '.productName')) {
+                formData.invoiceData.invoiceProductDetails[index].productName = value;
+            }
+            else if (name === ('invoiceProductDetails.' + index + '.productQuantity')) {
+                formData.invoiceData.invoiceProductDetails[index].productQuantity = value;
+                FormCalculation(formData)
+            }
+            else if (name === ('invoiceProductDetails.' + index + '.productPrice') && !Number.isNaN(value)) {
+                formData.invoiceData.invoiceProductDetails[index].productPrice = value;
+                FormCalculation(formData)
+            }
+            else if (name === "lineTotal" && !Number.isNaN(value)){
+                formData.invoiceData.invoiceProductDetails[index].lineTotal = value;
+            }
+           return newFormData
+        })
     }
 
     //Add new product button appends a new Product component 
-    const onAddBtnClick = (e, index) => {
-        //console.log("Start ", formData)
+    const onAddBtnClick = useCallback((e, index) => {
         e.preventDefault()
 
-        formData.invoiceData.invoiceProductDetails.push({
+        setFormData((prevFormData)=>{
+            const newFormData={...prevFormData}
+            newFormData.invoiceData.invoiceProductDetails.push({
 
-            productID: 0,
-            productName: "",
-            productQuantity: 0,
-            productPrice: 0,
-            lineTotal: 0
+                productID: "",
+                productName: "",
+                productQuantity: "",
+                productPrice: "",
+                lineTotal: 0
+            })
+           return newFormData
         })
-        //Sets new state of the appended product details component to a current state
-        setFormData(oldFormData => ({
-            ...oldFormData,
-            ...formData
-        }))
-        //console.log("End ",formData)
 
-    }
+    },[formData])
 
     // Delete the Product details Row
-    const onDeleteBtnDelete = (e, index) => {
-        //console.log("previous: ", JSON.stringify(formData))
-        //console.log("index: ", index)
-        formData.invoiceData.invoiceProductDetails = formData.invoiceData.invoiceProductDetails.filter((item, i) => {
-            return i !== index;
+    const onDeleteBtnDelete = useCallback( (e, index) => {  
+        setFormData((prevFormData)=>{
+            const newFormData={...prevFormData}
+            newFormData.invoiceData.invoiceProductDetails=formData.invoiceData.invoiceProductDetails.filter((item, i) => {
+                    return i !== index;
+                 })
+                 return newFormData
         })
-        // const newFormData = cloneDeep(formData)
-        // setFormData(newFormData)
-        setFormData(oldFormData => ({
-            ...oldFormData,
-            ...formData
-        }))
-
-        //console.log("after delete: ", JSON.stringify(formData))
-    }
+    },[formData]);
 
     // On Submit Form
     //Call an API to post the data into MongoDB
@@ -311,9 +297,9 @@ export default function CreateInvoiceNew() {
                                     <Grid container sx={{ overflowY: "auto", maxHeight: "250px", }}>
                                         {invoiceData.invoiceProductDetails.map((item, index) => (
 
-                                            <React.Fragment key={index}>
+                                            <React.Fragment key={`invoiceProductDetails.${index}.productID`}>
                                                 {/* {console.log(index)} */}
-                                                <Grid container spacing={1} key={index}>
+                                                <Grid container spacing={1} key={`invoiceProductDetails.${index}.productID`}>
                                                     <Grid item xs={1.5} sm={1.5} key={"productID"+index}>
                                                         <TextField
                                                             sx={{
@@ -323,6 +309,7 @@ export default function CreateInvoiceNew() {
                                                             required
                                                             id={"productID" + index}
                                                             name="productID"
+                                                            value={(item.productID===0)?"":item.productID}
                                                             margin="dense"
                                                             size="small"
                                                             {...register(`invoiceProductDetails.${index}.productID`)}
@@ -340,6 +327,7 @@ export default function CreateInvoiceNew() {
                                                             required
                                                             id={"productName" + index}
                                                             name="productName"
+                                                            value={item.productName}
                                                             fullWidth
                                                             margin="dense"
                                                             size="small"
@@ -359,6 +347,7 @@ export default function CreateInvoiceNew() {
                                                             required
                                                             id={"productQuantity" + index}
                                                             name="productQuantity"
+                                                            value={(item.productQuantity===0)? "" :item.productQuantity}
                                                             fullWidth
                                                             margin="dense"
                                                             size="small"
@@ -378,6 +367,7 @@ export default function CreateInvoiceNew() {
                                                             required
                                                             id={"productPrice" + index}
                                                             name="productPrice"
+                                                            value={(item.productPrice===0)?"":item.productPrice}
                                                             fullWidth
                                                             margin="dense"
                                                             size="small"
