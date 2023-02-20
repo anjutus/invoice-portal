@@ -56,11 +56,11 @@ if (isLoading) return <div>Loading...</div>;
 const invoicesAmount = InvoicesStats(data);
 console.log("invoicesAmount.approvedAmount"+invoicesAmount.approvedAmount);
 const numofInvoiceAmountData = {
-    labels: ['Approved','Pending','Rejected'],//InvoiceData.filter(invoice => invoice.status !== properties.REJECTED).map((invoice) => invoice.status),
+    labels: ['Approved','Pending','Rejected'],
     datasets: [
         {
             label: '# of Invoices',
-            data: [invoicesAmount.approvedAmount,invoicesAmount.pendingAmount,invoicesAmount.rejectedAmount],//InvoiceData.filter(invoice => invoice.status !== properties.REJECTED).map((invoice) => invoice.invoiceCount),
+            data: [invoicesAmount.approvedAmount,invoicesAmount.pendingAmount,invoicesAmount.rejectedAmount],
             backgroundColor: [
                 'rgba(255, 99, 132)',
                 'rgba(54, 162, 235)',
@@ -78,7 +78,7 @@ const numofInvoiceAmountData = {
 };
 
 const numofInvoiceData = {
-    labels: ['Approved','Pending','Rejected'],//InvoiceData.map((invoice) => invoice.status),
+    labels: ['Approved','Pending','Rejected'],
     datasets: [
         {
             label: 'Invoice Amounts ',

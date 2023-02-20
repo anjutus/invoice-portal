@@ -12,12 +12,18 @@ import Typography from '@mui/material/Typography';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import Button from '@mui/material/Button';
 import ProductDetailsTable from './ProductDetailsTable';
+import { useNavigate } from 'react-router-dom';
 
 var invoiceHeader = ["Product ID", "Product Name", "Quantity", "Price", "Line Total"];
 
 export default function ViewInvoiceDetails(props) {
 
     const data=props.invoicedata;
+
+    const navigate = useNavigate();
+	const goBack = () => {
+		navigate(-1);
+	}
 
     return (<div>
         <Container maxWidth="lg" sx={{ display: "-ms-flexbox" }}>
@@ -62,6 +68,14 @@ export default function ViewInvoiceDetails(props) {
                                             {data.invoiceData.dueDate}
                                         </TableCell>
                                     </TableRow>
+                                    <TableRow>
+                                        <TableCell>
+                                            Status
+                                        </TableCell>
+                                        <TableCell>
+                                            {data.invoiceData.status}
+                                        </TableCell>
+                                    </TableRow>
                                     <TableRow sx={{ backgroundColor: "#99CB79" }}>
                                         <TableCell sx={{ fontWeight: 'bold' }}>
                                             Total Amount
@@ -92,7 +106,7 @@ export default function ViewInvoiceDetails(props) {
 
             </Card>
             <Grid sx={{ padding: "20px" }}>
-                <Button variant="contained">Back</Button>
+                <Button variant="contained" onClick={goBack}>Back</Button>
             </Grid>
         </Container>
     </div>)
