@@ -61,8 +61,7 @@ Buyer : https://www.figma.com/proto/q0eAY8aYfc7ewD5pJy5LCr/Invoice-Portal-Design
 ![Invoice Portal Architecture](./public/Invoice%20Portal%20Architecture.jpg)
 
 ## Project Status
-Project is still in devlopment phase.Currently I am working on creating form for invoice portal.
-Next step will be creating a view invoice page once the form is submitted.
+Project is still in devlopment phase.Currently I am working on integrating Auth0 to my App.
 
 ## Sources
 https://reactjs.org/
