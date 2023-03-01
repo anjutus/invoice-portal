@@ -22,7 +22,8 @@ import Link from '@mui/material/Link'
 import Logo from '../Media/InvoicePortalLogo.png'
 import { deepOrange } from '@mui/material/colors';
 import { Link as ReactLink } from "react-router-dom";
-
+import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from '../auth/LoginButton';
 //Menu name array list
 const pages = [
                 {  
@@ -38,9 +39,6 @@ const pages = [
                     menuLinkName: "/inquires"
                 }
             ];
-
-//Srtting name array list
-const settings = ['Profile', 'Account', 'Logout'];
 
 function NavigationBar() {
 
@@ -61,15 +59,16 @@ function NavigationBar() {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+    const { user, isAuthenticated, isLoading,logout } = useAuth0();
 
     return (
-        <AppBar position="static" sx={{marginBottom:"20px"}}>
+        <AppBar position="static" sx={{marginBottom:"20px", backgroundColor: "#3DA000"}}>
             <Container maxWidth="xl" sx={{ backgroundColor: "#3DA000" }}>
                 <Toolbar>
                     <Link href="#" underline="none" sx={{ mr: 2, display: { xs: 'none', md: 'flex' },}}>
                         <img className="nav-logo" src={Logo} alt="Invoice Portal Logo" width="40" height="40"/>
                     </Link>
-                    <Typography variant="h6" noWrap component="a" href="/"
+                    <Typography getByTestId ="Invoice-Portal-Logo" variant="h6" noWrap component="a" href="/"
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
@@ -82,6 +81,7 @@ function NavigationBar() {
                     </Typography>
 
                     {/* For Small Screen Device */}
+                    {isAuthenticated && (
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"
@@ -118,6 +118,7 @@ function NavigationBar() {
                             ))}
                         </Menu>
                     </Box>
+                    )}
                     {/* For Large Screen Device */}
                     <Link
                         href="#"
@@ -136,6 +137,7 @@ function NavigationBar() {
                         />
                     </Link>
                     <Typography
+                        getByTestId ="Invoice-Portal-Logo"
                         variant="h5"
                         noWrap
                         component="a"
@@ -152,9 +154,10 @@ function NavigationBar() {
                     >
                         Invoice Portal
                     </Typography>
+                    {isAuthenticated && (
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
-                            <ReactLink to={page.menuLinkName} style={{textDecoration:'none'}}><Button
+                            <ReactLink to={page.menuLinkName} key={page.menuName} style={{textDecoration:'none'}}><Button
                                 key={page.menuName}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
@@ -163,8 +166,8 @@ function NavigationBar() {
                             </Button></ReactLink>
                         ))}
                     </Box>
-
-                    <Box sx={{ flexGrow: 0 }}>
+                    )}
+                     {isAuthenticated && (<Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                 <Avatar sx={{ bgcolor: deepOrange[500] }} alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -186,13 +189,19 @@ function NavigationBar() {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
+                            
+                            
+                                <MenuItem>
+                                <ReactLink to="/userProfile" style={{textDecoration:'none'}}>
+                                    <Typography textAlign="center">Profile</Typography>
+                                    </ReactLink>
                                 </MenuItem>
-                            ))}
+                                <MenuItem onClick={() => logout({ returnTo: window.location.origin, })}>
+                                    <Typography textAlign="center">Log Out</Typography>
+                                </MenuItem>
                         </Menu>
                     </Box>
+                    )}
                 </Toolbar>
             </Container>
         </AppBar>
