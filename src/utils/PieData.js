@@ -1,21 +1,66 @@
 export  const InvoiceData = [
-    {
-      id: 1,
-      status: "Approved",
-      invoiceCount : 200,
-      invoiceTotalAmount:1000
+  {
+
+    invoiceID: 1,
+    supplierName: "A",
+    issueDate: "02/28/2023",
+    dueDate: "04/28/2023",
+    status:"PENDING",
+    payment: {
+        tax: 10,
+        discount: 0,
+        comment: "",
+        totalAmount: 90
     },
+    invoiceProductDetails: [{
+        productID: 1,
+        productName: "A",
+        productQuantity: 10,
+        productPrice: 10,
+        lineTotal: 100
+    }]
+},
     {
-      id: 2,
-      status: "Pending",
-      invoiceCount : 100,
-      invoiceTotalAmount:2000
-    },
+
+      invoiceID: 2,
+      supplierName: "B",
+      issueDate: "02/28/2023",
+      dueDate: "02/28/2023",
+      status:"APPROVED",
+      payment: {
+          tax: 10,
+          discount: 0,
+          comment: "",
+          totalAmount: 90
+      },
+      invoiceProductDetails: [{
+          productID: 1,
+          productName: "B",
+          productQuantity: 10,
+          productPrice: 10,
+          lineTotal: 100
+      }]
+  },
     {
-      id: 3,
-      status: "Rejected",
-      invoiceCount : 300,
-      invoiceTotalAmount:3000
-    }
+
+      invoiceID: 3,
+      supplierName: "C",
+      issueDate: "02/28/2023",
+      dueDate: "02/28/2023",
+      status:"REJECTED",
+      payment: {
+          tax: 10,
+          discount: 0,
+          comment: "",
+          totalAmount: 90
+      },
+      invoiceProductDetails: [{
+          productID: 1,
+          productName: "C",
+          productQuantity: 10,
+          productPrice: 10,
+          lineTotal: 100
+      }]
+  }
   ];
 

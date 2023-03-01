@@ -10,7 +10,7 @@ export default function LandingPage() {
 
     return (
         <Container maxWidth="xl" sx={{ display: "-ms-flexbox" }}>
-            <Grid container direction="row" justifyContent="center" alignItems="center" spacing={5}>
+            <Grid container direction="row" justifyContent="center" alignItems="center" spacing={3}>
                 <Grid item xs={12} xl={12} sx={{ display: 'flex'}} justifyContent="center">
                     {/* <Card sx={{ display: 'flex',maxWidth: '100%',}}>
                         <CardMedia component="img"
@@ -23,7 +23,7 @@ export default function LandingPage() {
                 </Grid>
                 <Divider orientation="vertical" />
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                    <Typography variant="h6">
+                    <Typography data-testid="Welcome-text" variant="h6">
                             Welcome please login to Invoice portal
                         </Typography>
                 </Grid>
@@ -35,19 +35,22 @@ export default function LandingPage() {
                     )}
                 </Grid>
                 <Divider orientation="vertical" />
-                <Grid item xs={6} sm={6} md={6} lg={6} xl={6} spacing={0}>
+                
+            </Grid>
+            <Grid container direction="row" justifyContent="center" alignItems="center" spacing={1} paddingTop={3}>
+            <Grid item xs={6} >
                 <Typography variant="h6" textAlign={"right"}>
                             New User ?
                         </Typography>
                         </Grid>
-                        <Grid item xs={6} sm={6} md={6} lg={6} xl={6} textAlign={"left"}> 
+                        <Grid item xs={6} textAlign={"left"}> 
                 {!isAuthenticated && (
                         
                            <SignupButton></SignupButton>
                        
                     )}
                 </Grid>
-            </Grid>
+                </Grid>
         </Container>
     )
 }

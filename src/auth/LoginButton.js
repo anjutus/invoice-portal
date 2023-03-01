@@ -5,7 +5,7 @@ import { Button } from '@mui/material';
 const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
   return (
-    <Button variant="contained" onClick={() => loginWithRedirect()}>Login</Button>
+    <Button aria-label="LoginButton" variant="contained" onClick={() => loginWithRedirect()}>Login</Button>
     
   );
 };

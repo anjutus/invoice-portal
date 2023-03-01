@@ -40,9 +40,6 @@ const pages = [
                 }
             ];
 
-//Srtting name array list
-const settings = ['Profile', 'Account', 'Logout'];
-
 function NavigationBar() {
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -65,13 +62,13 @@ function NavigationBar() {
     const { user, isAuthenticated, isLoading,logout } = useAuth0();
 
     return (
-        <AppBar position="static" sx={{marginBottom:"20px"}}>
+        <AppBar position="static" sx={{marginBottom:"20px", backgroundColor: "#3DA000"}}>
             <Container maxWidth="xl" sx={{ backgroundColor: "#3DA000" }}>
                 <Toolbar>
                     <Link href="#" underline="none" sx={{ mr: 2, display: { xs: 'none', md: 'flex' },}}>
                         <img className="nav-logo" src={Logo} alt="Invoice Portal Logo" width="40" height="40"/>
                     </Link>
-                    <Typography variant="h6" noWrap component="a" href="/"
+                    <Typography getByTestId ="Invoice-Portal-Logo" variant="h6" noWrap component="a" href="/"
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
@@ -140,6 +137,7 @@ function NavigationBar() {
                         />
                     </Link>
                     <Typography
+                        getByTestId ="Invoice-Portal-Logo"
                         variant="h5"
                         noWrap
                         component="a"
@@ -159,7 +157,7 @@ function NavigationBar() {
                     {isAuthenticated && (
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
-                            <ReactLink to={page.menuLinkName} style={{textDecoration:'none'}}><Button
+                            <ReactLink to={page.menuLinkName} key={page.menuName} style={{textDecoration:'none'}}><Button
                                 key={page.menuName}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
@@ -192,8 +190,11 @@ function NavigationBar() {
                             onClose={handleCloseUserMenu}
                         >
                             
-                                <MenuItem onClick={handleCloseUserMenu}>
+                            
+                                <MenuItem>
+                                <ReactLink to="/userProfile" style={{textDecoration:'none'}}>
                                     <Typography textAlign="center">Profile</Typography>
+                                    </ReactLink>
                                 </MenuItem>
                                 <MenuItem onClick={() => logout({ returnTo: window.location.origin, })}>
                                     <Typography textAlign="center">Log Out</Typography>
